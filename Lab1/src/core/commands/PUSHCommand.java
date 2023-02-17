@@ -4,9 +4,9 @@ import core.context.Context;
 
 public class PUSHCommand extends Command {
 
-	PUSHCommand(Context cnt) {
-		super(cnt);
-
+	PUSHCommand(Object[] args) {
+		super(args);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override

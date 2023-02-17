@@ -4,8 +4,8 @@ import core.context.Context;
 
 public final class PRINTCommand extends Command {
 
-	public PRINTCommand(Context cnt) {
-		super(cnt);
+	public PRINTCommand(Object[] args) {
+		super(args);
 		// TODO Auto-generated constructor stub
 	}
 

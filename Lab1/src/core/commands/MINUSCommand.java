@@ -4,8 +4,8 @@ import core.context.Context;
 
 public class MINUSCommand extends Command {
 
-	MINUSCommand(Context cnt) {
-		super(cnt);
+	MINUSCommand(Object[] args) {
+		super(args);
 		// TODO Auto-generated constructor stub
 	}
 

@@ -4,8 +4,9 @@ import core.context.Context;
 
 public class POPCommand extends Command {
 
-	POPCommand(Context cnt){
-		super(cnt);
+	POPCommand(Object[] args) {
+		super(args);
+		// TODO Auto-generated constructor stub
 	}
 	
 	@Override

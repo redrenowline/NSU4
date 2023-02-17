@@ -4,8 +4,8 @@ import core.context.Context;
 
 public final class DEFINECommand extends Command {
 
-	public DEFINECommand(Context cnt) {
-		super(cnt);
+	public DEFINECommand(Object[] args) {
+		super(args);
 		// TODO Auto-generated constructor stub
 	}
 

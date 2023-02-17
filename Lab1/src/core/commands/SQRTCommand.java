@@ -4,8 +4,8 @@ import core.context.Context;
 
 public class SQRTCommand extends Command {
 
-	public SQRTCommand(Context cnt) {
-		super(cnt);
+	public SQRTCommand(Object[] args) {
+		super(args);
 		// TODO Auto-generated constructor stub
 	}
 

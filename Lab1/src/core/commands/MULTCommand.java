@@ -4,8 +4,8 @@ import core.context.Context;
 
 public class MULTCommand extends Command {
 
-	MULTCommand(Context cnt) {
-		super(cnt);
+	MULTCommand(Object[] args) {
+		super(args);
 		// TODO Auto-generated constructor stub
 	}
 

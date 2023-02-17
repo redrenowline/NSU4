@@ -4,8 +4,8 @@ import core.context.Context;
 
 public class DIVCommand extends Command {
 
-	public DIVCommand(Context cnt) {
-		super(cnt);
+	public DIVCommand(Object[] args) {
+		super(args);
 		// TODO Auto-generated constructor stub
 	}
 

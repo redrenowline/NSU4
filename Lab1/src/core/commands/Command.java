@@ -4,9 +4,10 @@ import core.context.Context;
 
 public abstract class Command implements ICommand {
 
-	protected Context cnt;
+	protected Object[] args;
 	
-	Command(Context cnt){
-		this.cnt = cnt;
+	public Command(Object[] args) {
+		this.args = args;
 	}
+	
 }
