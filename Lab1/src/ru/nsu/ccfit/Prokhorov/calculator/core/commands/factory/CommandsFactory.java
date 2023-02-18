@@ -1,4 +1,4 @@
-package core.commands.factory;
+package ru.nsu.ccfit.Prokhorov.calculator.core.commands.factory;
 
 import java.io.InputStream;
 import java.lang.reflect.Constructor;
@@ -7,9 +7,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Properties;
 
-import core.commands.Command;
-import core.commands.ICommand;
-import core.context.Context;
+import ru.nsu.ccfit.Prokhorov.calculator.core.commands.Command;
+import ru.nsu.ccfit.Prokhorov.calculator.core.commands.ICommand;
+import ru.nsu.ccfit.Prokhorov.calculator.core.context.Context;
 
 public class CommandsFactory {
 	

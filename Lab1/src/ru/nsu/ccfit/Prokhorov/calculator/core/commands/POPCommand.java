@@ -1,6 +1,6 @@
-package core.commands;
+package ru.nsu.ccfit.Prokhorov.calculator.core.commands;
 
-import core.context.Context;
+import ru.nsu.ccfit.Prokhorov.calculator.core.context.Context;
 
 public class POPCommand extends Command {
 

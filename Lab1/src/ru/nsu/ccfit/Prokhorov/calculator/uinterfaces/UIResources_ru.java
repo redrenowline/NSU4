@@ -1,4 +1,4 @@
-package uinterfaces;
+package ru.nsu.ccfit.Prokhorov.calculator.uinterfaces;
 
 import java.util.ListResourceBundle;
 

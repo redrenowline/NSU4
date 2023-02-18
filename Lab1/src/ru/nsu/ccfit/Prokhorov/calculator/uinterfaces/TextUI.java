@@ -1,11 +1,11 @@
-package uinterfaces;
+package ru.nsu.ccfit.Prokhorov.calculator.uinterfaces;
 
 import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import core.commands.factory.CommandsFactory;
-import core.context.Context;
+import ru.nsu.ccfit.Prokhorov.calculator.core.commands.factory.CommandsFactory;
+import ru.nsu.ccfit.Prokhorov.calculator.core.context.Context;
 
 public class TextUI {
 
