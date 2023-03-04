@@ -1,18 +1,26 @@
 package ru.nsu.ccfit.Prokhorov.calculator.core.commands;
 
+import java.util.EmptyStackException;
+
 import ru.nsu.ccfit.Prokhorov.calculator.core.context.Context;
+import ru.nsu.ccfit.Prokhorov.calculator.core.context.exceptions.NotFoundElementInContextException;
 
 public class MINUSCommand extends Command {
 
-	MINUSCommand(Object[] args) {
+	public MINUSCommand(Object[] args) {
 		super(args);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void exec() {
-		// TODO Auto-generated method stub
-
+		try {
+			Double fs = context.getValueFromStack();
+			Double sc = context.getValueFromStack();
+			fs -= sc;
+			context.addValueToStack(fs);
+		}catch(EmptyStackException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

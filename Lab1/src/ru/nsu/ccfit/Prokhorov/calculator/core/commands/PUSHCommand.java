@@ -4,15 +4,16 @@ import ru.nsu.ccfit.Prokhorov.calculator.core.context.Context;
 
 public class PUSHCommand extends Command {
 
+	Double value;
+	
 	public PUSHCommand(Object[] args) {
 		super(args);
-		Context pr = (Context)this.args[0];
-		System.out.print("Everything is ok");
+		context = (Context)this.args[0];
+		value = Double.parseDouble(((String)this.args[1]));
 	}
 
 	@Override
 	public void exec() {
-
+		context.addValueToStack(value);
 	}
-
 }

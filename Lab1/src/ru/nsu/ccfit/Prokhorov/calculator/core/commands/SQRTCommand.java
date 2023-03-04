@@ -1,5 +1,7 @@
 package ru.nsu.ccfit.Prokhorov.calculator.core.commands;
 
+import java.util.EmptyStackException;
+
 import ru.nsu.ccfit.Prokhorov.calculator.core.context.Context;
 
 public class SQRTCommand extends Command {
@@ -11,8 +13,13 @@ public class SQRTCommand extends Command {
 
 	@Override
 	public void exec() {
-		// TODO Auto-generated method stub
-
+		try {
+			Double fs = context.getValueFromStack();
+			fs = Math.sqrt(fs);
+			context.addValueToStack(fs);
+		}catch(EmptyStackException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

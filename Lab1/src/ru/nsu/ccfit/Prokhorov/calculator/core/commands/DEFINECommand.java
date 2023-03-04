@@ -4,15 +4,19 @@ import ru.nsu.ccfit.Prokhorov.calculator.core.context.Context;
 
 public final class DEFINECommand extends Command {
 
+	private String name;
+	private Double value;
+	
 	public DEFINECommand(Object[] args) {
 		super(args);
-		// TODO Auto-generated constructor stub
+		context  = (Context)args[0];
+		name = (String) args[1];
+		value = Double.parseDouble((String)args[2]);
 	}
 
 	@Override
 	public void exec() {
-		// TODO Auto-generated method stub
-
+		context.addValue(name, value);
 	}
 
 }
