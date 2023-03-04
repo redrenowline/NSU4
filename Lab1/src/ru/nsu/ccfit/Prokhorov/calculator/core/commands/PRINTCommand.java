@@ -1,11 +1,14 @@
 package ru.nsu.ccfit.Prokhorov.calculator.core.commands;
 
-import ru.nsu.ccfit.Prokhorov.calculator.core.context.Context;
+import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.WrongArgumentsException;
 
 public final class PRINTCommand extends Command {
 
-	public PRINTCommand(Object[] args) {
+	public PRINTCommand(Object[] args) throws WrongArgumentsException {
 		super(args);
+		if(args.length != 1) {
+			throw (new WrongArgumentsException());
+		}
 	}
 
 	@Override

@@ -3,14 +3,11 @@ package ru.nsu.ccfit.Prokhorov.calculator.core.commands.factory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.nio.charset.StandardCharsets;
-import java.util.Map;
 import java.util.Properties;
 
 import ru.nsu.ccfit.Prokhorov.calculator.core.commands.Command;
-import ru.nsu.ccfit.Prokhorov.calculator.core.commands.ICommand;
 import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.FactorySystemError;
+import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.WrongArgumentsException;
 import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.WrongCommandException;
 import ru.nsu.ccfit.Prokhorov.calculator.core.context.Context;
 
@@ -54,8 +51,7 @@ public class CommandsFactory {
 		try {
 			return (Command) constructor.newInstance((Object)args);
 		} catch (Exception e) {
-			throw (new WrongCommandException());
+			throw (new WrongArgumentsException());
 		}
-
 	}
 }

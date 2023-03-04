@@ -2,13 +2,15 @@ package ru.nsu.ccfit.Prokhorov.calculator.core.commands;
 
 import java.util.EmptyStackException;
 
-import ru.nsu.ccfit.Prokhorov.calculator.core.context.Context;
+import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.WrongArgumentsException;
 
 public class SQRTCommand extends Command {
 
-	public SQRTCommand(Object[] args) {
+	public SQRTCommand(Object[] args) throws WrongArgumentsException {
 		super(args);
-		// TODO Auto-generated constructor stub
+		if(args.length != 1) {
+			throw (new WrongArgumentsException());
+		}
 	}
 
 	@Override

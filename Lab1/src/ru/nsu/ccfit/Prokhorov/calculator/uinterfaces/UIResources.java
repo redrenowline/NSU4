@@ -1,7 +1,7 @@
 package ru.nsu.ccfit.Prokhorov.calculator.uinterfaces;
 
 public class UIResources {
-	public static Double verison = 1.1;
+	public static Double verison = 0.1;
 	public static String companyName = "Prokhorov's inc.";
 	
 	public static String HELLO_MESSAGE_ID = "hello message";

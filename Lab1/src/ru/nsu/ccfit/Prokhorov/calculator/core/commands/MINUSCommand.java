@@ -2,13 +2,14 @@ package ru.nsu.ccfit.Prokhorov.calculator.core.commands;
 
 import java.util.EmptyStackException;
 
-import ru.nsu.ccfit.Prokhorov.calculator.core.context.Context;
-import ru.nsu.ccfit.Prokhorov.calculator.core.context.exceptions.NotFoundElementInContextException;
-
+import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.WrongArgumentsException;
 public class MINUSCommand extends Command {
 
-	public MINUSCommand(Object[] args) {
+	public MINUSCommand(Object[] args) throws WrongArgumentsException {
 		super(args);
+		if(args.length != 1) {
+			throw (new WrongArgumentsException());
+		}
 	}
 
 	@Override

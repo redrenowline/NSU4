@@ -1,12 +1,13 @@
 package ru.nsu.ccfit.Prokhorov.calculator.core.commands;
 
+import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.WrongArgumentsException;
 import ru.nsu.ccfit.Prokhorov.calculator.core.context.Context;
 
 public class PUSHCommand extends Command {
 
 	Double value;
 	
-	public PUSHCommand(Object[] args) {
+	public PUSHCommand(Object[] args) throws WrongArgumentsException {
 		super(args);
 		context = (Context)this.args[0];
 		value = Double.parseDouble(((String)this.args[1]));

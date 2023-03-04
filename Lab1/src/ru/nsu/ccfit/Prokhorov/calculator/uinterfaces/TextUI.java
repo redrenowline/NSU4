@@ -6,8 +6,8 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
-import ru.nsu.ccfit.Prokhorov.calculator.core.commands.Command;
 import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.FactorySystemError;
+import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.WrongArgumentsException;
 import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.WrongCommandException;
 import ru.nsu.ccfit.Prokhorov.calculator.core.commands.factory.CommandsFactory;
 import ru.nsu.ccfit.Prokhorov.calculator.core.context.Context;
@@ -54,32 +54,37 @@ public class TextUI {
 	
 	public void onlineModeExecution() {
 		Scanner sc = new Scanner(this.in);
-		while(true) {
-			String strl = sc.nextLine();
+		String strl = "start";
+		while(strl != "exit") {
+			strl = sc.nextLine();
 			try {
 				factory.createComand(strl).exec();
 			}catch(WrongCommandException e) {
 				ou.print(resources.getString(UIResources.WRONGCOMMAND_ID));
-				continue;
-			}catch(FactorySystemError e) {
-				ou.print(resources.getString(UIResources.FACTORYSYSTEMERROR_ID));				
-			}
-		}
-	}
-	
-	public void offlineModeExecution(String str) {
-		StringGetter getter = new StringGetter(str);
-		while(true) {
-			String sstrl = getter.getString();
-			try {
-				factory.createComand(sstrl);
-			}catch(WrongCommandException e) {
-				ou.print(resources.getString(UIResources.WRONGCOMMAND_ID));
-				continue;
+			}catch(WrongArgumentsException e){
+				ou.print(resources.getString(UIResources.WRONGARGUMENT_ID));
 			}catch(FactorySystemError e) {
 				ou.print(resources.getString(UIResources.FACTORYSYSTEMERROR_ID));
 			}
 		}
+		sc.close();
 	}
 	
+	public void offlineModeExecution(String str) {
+		StringGetter getter = new StringGetter(str);
+		String sstrl;
+		while((sstrl = getter.getString())!= null) {
+			try {
+				factory.createComand(sstrl).exec();
+			}catch(WrongCommandException e) {
+				ou.print(resources.getString(UIResources.WRONGCOMMAND_ID));
+				continue;
+			}catch(WrongArgumentsException e){
+				ou.print(resources.getString(UIResources.WRONGARGUMENT_ID));
+			}catch(FactorySystemError e) {
+				ou.print(resources.getString(UIResources.FACTORYSYSTEMERROR_ID));
+				continue;
+			}
+		}
+	}
 }

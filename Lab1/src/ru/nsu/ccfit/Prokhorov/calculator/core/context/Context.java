@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
-import ru.nsu.ccfit.Prokhorov.calculator.core.context.exceptions.NotFoundElementInContextException;
-
 public class Context {
 	
 	private Map<String, Double> values;

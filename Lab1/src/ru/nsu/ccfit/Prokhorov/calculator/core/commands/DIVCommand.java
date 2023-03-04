@@ -2,12 +2,15 @@ package ru.nsu.ccfit.Prokhorov.calculator.core.commands;
 
 import java.util.EmptyStackException;
 
-import ru.nsu.ccfit.Prokhorov.calculator.core.context.Context;
+import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.WrongArgumentsException;
 
 public class DIVCommand extends Command {
 
-	public DIVCommand(Object[] args) {
+	public DIVCommand(Object[] args) throws WrongArgumentsException {
 		super(args);
+		if(args.length != 1) {
+			throw (new WrongArgumentsException());
+		}
 	}
 
 	@Override
