@@ -11,21 +11,12 @@ public final class StringGetter {
 	private File fl;
 	private BufferedReader reader;
 	
-	public StringGetter(String str) {
+	public StringGetter(String str) throws FileNotFoundException {
 		fl = new File(str);
-		try {
-			reader = new BufferedReader(new FileReader(fl));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		reader = new BufferedReader(new FileReader(fl));
 	}
 	
-	public String getString() {
-		try {
-			return reader.readLine();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
+	public String getString() throws IOException {
+		return reader.readLine();
 	}
 }

@@ -1,11 +1,14 @@
 package ru.nsu.ccfit.Prokhorov.calculator.uinterfaces;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
+import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.ExecutionCommandException;
 import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.FactorySystemError;
 import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.WrongArgumentsException;
 import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.WrongCommandException;
@@ -44,7 +47,7 @@ public class TextUI {
 	}
 	
 	public void start() {
-		System.out.print(String.format(resources.getString(UIResources.HELLO_MESSAGE_ID), UIResources.verison));
+		ou.print(String.format(resources.getString(UIResources.HELLO_MESSAGE_ID), UIResources.verison));
 		if(this.md == MODE.ONLINEMODE) {
 			onlineModeExecution();
 		}else {
@@ -55,8 +58,11 @@ public class TextUI {
 	public void onlineModeExecution() {
 		Scanner sc = new Scanner(this.in);
 		String strl = "start";
-		while(strl != "exit") {
+		while(strl != "exit"){
 			strl = sc.nextLine();
+			if(strl.startsWith(UIResources.COMMENT_STRING)) {
+				continue;
+			}
 			try {
 				factory.createComand(strl).exec();
 			}catch(WrongCommandException e) {
@@ -65,26 +71,45 @@ public class TextUI {
 				ou.print(resources.getString(UIResources.WRONGARGUMENT_ID));
 			}catch(FactorySystemError e) {
 				ou.print(resources.getString(UIResources.FACTORYSYSTEMERROR_ID));
+			} catch (ExecutionCommandException e) {
+				ou.print(resources.getString(UIResources.WRONGCOMMNADEXECUTION_ID));
 			}
 		}
 		sc.close();
 	}
 	
 	public void offlineModeExecution(String str) {
-		StringGetter getter = new StringGetter(str);
+		StringGetter getter;
+		try {
+			getter = new StringGetter(str);
+		}catch(FileNotFoundException e) {
+			ou.print(resources.getString(UIResources.FILENOTFOUNT_ID));
+			return;
+		}
 		String sstrl;
-		while((sstrl = getter.getString())!= null) {
-			try {
-				factory.createComand(sstrl).exec();
-			}catch(WrongCommandException e) {
-				ou.print(resources.getString(UIResources.WRONGCOMMAND_ID));
-				continue;
-			}catch(WrongArgumentsException e){
-				ou.print(resources.getString(UIResources.WRONGARGUMENT_ID));
-			}catch(FactorySystemError e) {
-				ou.print(resources.getString(UIResources.FACTORYSYSTEMERROR_ID));
-				continue;
+		try {
+			while((sstrl = getter.getString())!= null) {
+				if(sstrl.startsWith(UIResources.COMMENT_STRING)) {
+					continue;
+				}
+				try {
+					factory.createComand(sstrl).exec();
+				}catch(WrongCommandException e) {
+					ou.print(resources.getString(UIResources.WRONGCOMMAND_ID));
+					continue;
+				}catch(WrongArgumentsException e){
+					ou.print(resources.getString(UIResources.WRONGARGUMENT_ID));
+					continue;
+				}catch(FactorySystemError e) {
+					ou.print(resources.getString(UIResources.FACTORYSYSTEMERROR_ID));
+					continue;
+				} catch (ExecutionCommandException e) {
+					ou.print(resources.getString(UIResources.WRONGCOMMNADEXECUTION_ID));
+					continue;
+				}
 			}
+		} catch (IOException e) {
+			ou.print(resources.getString(UIResources.IOEXCEPTION_ID));
 		}
 	}
 }
