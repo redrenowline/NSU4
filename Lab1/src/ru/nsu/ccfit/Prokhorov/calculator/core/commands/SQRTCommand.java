@@ -2,7 +2,9 @@ package ru.nsu.ccfit.Prokhorov.calculator.core.commands;
 
 import java.util.EmptyStackException;
 
+import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.ExecutionCommandException;
 import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.WrongArgumentsException;
+import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.WrongCommandException;
 
 public class SQRTCommand extends Command {
 
@@ -14,13 +16,13 @@ public class SQRTCommand extends Command {
 	}
 
 	@Override
-	public void exec() {
+	public void exec()  throws ExecutionCommandException {
 		try {
 			Double fs = context.getValueFromStack();
 			fs = Math.sqrt(fs);
 			context.addValueToStack(fs);
 		}catch(EmptyStackException e) {
-			e.printStackTrace();
+			throw (new ExecutionCommandException());
 		}
 	}
 

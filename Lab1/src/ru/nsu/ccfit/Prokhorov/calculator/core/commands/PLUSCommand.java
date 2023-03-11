@@ -1,7 +1,6 @@
 package ru.nsu.ccfit.Prokhorov.calculator.core.commands;
 
-import java.util.EmptyStackException;
-
+import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.ExecutionCommandException;
 import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.WrongArgumentsException;
 
 public class PLUSCommand extends Command {
@@ -14,14 +13,17 @@ public class PLUSCommand extends Command {
 	}
 
 	@Override
-	public void exec() {
+	public void exec() throws ExecutionCommandException {
+		Double fs = null, sc = null;
 		try {
-			Double fs = context.getValueFromStack();
-			Double sc = context.getValueFromStack();
-			fs += sc;
-			context.addValueToStack(fs);
-		}catch(EmptyStackException e){
-			e.printStackTrace();
+			fs = context.getValueFromStack();
+			sc = context.getValueFromStack();
+			Double res = fs + sc;
+			context.addValueToStack(res);
+		}catch(Exception e){
+			if(sc != null) context.addValueToStack(sc.doubleValue());
+			if(fs != null) context.addValueToStack(fs.doubleValue());
+			throw (new ExecutionCommandException());
 		}
 	}
 

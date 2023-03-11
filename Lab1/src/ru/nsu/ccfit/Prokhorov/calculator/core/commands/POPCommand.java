@@ -1,5 +1,6 @@
 package ru.nsu.ccfit.Prokhorov.calculator.core.commands;
 
+import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.ExecutionCommandException;
 import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.WrongArgumentsException;
 
 public class POPCommand extends Command {
@@ -13,7 +14,7 @@ public class POPCommand extends Command {
 	}
 	
 	@Override
-	public void exec() {
+	public void exec()  throws ExecutionCommandException {
 		context.getValueFromStack();
 	}
 
