@@ -1,12 +1,12 @@
 package ru.nsu.ccfit.Prokhorov.calculator.tests;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
 import ru.nsu.ccfit.Prokhorov.calculator.core.commands.factory.CommandsFactory;
 
-public class PUSHTest {
+public class PRINTTest {
 
 	@Test
 	public void Test1() {
@@ -14,20 +14,11 @@ public class PUSHTest {
 		CommandsFactory factory = new CommandsFactory(cont);
 		try {
 			factory.createComand("PUSH 5").exec();
+			factory.createComand("PRINT").exec();
 		}catch(Exception e) {
 			return;
 		}
 		assertTrue(cont.see() == 5);
-	}
-	
-	@Test 
-	public void TestException1() {
-		
-	}
-	
-	@Test
-	public void TestException2() {
-		
 	}
 
 }

@@ -3,11 +3,12 @@ package ru.nsu.ccfit.Prokhorov.calculator.core.commands;
 import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.ExecutionCommandException;
 import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.WrongArgumentsException;
 import ru.nsu.ccfit.Prokhorov.calculator.core.context.Context;
+import ru.nsu.ccfit.Prokhorov.calculator.core.context.NotFoundElementInContextException;
 
 public class PUSHCommand extends Command {
 
 	Double value;
-	String key;
+	String key = null;
 	
 	public PUSHCommand(Object[] args) throws WrongArgumentsException {
 		super(args);
@@ -24,6 +25,13 @@ public class PUSHCommand extends Command {
 
 	@Override
 	public void exec()  throws ExecutionCommandException {
-		context.addValueToStack(value);
+		if(key == null)
+			context.addValueToStack(value);
+		else
+			try {
+				context.addValueToStack(context.getValue(key));
+			} catch (NotFoundElementInContextException e) {
+				throw (new ExecutionCommandException());
+			}
 	}
 }
