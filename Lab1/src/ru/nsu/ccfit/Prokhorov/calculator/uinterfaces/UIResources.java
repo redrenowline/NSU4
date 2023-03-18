@@ -18,4 +18,6 @@ public class UIResources {
 	public static String HELPCOMMAND = "HELP";
 	public static String EXITCOMMAND = "exit";
 	public static String STARTCOMMAND = "start";
+	
+	public static String currentLocalization = "en";
 }

@@ -10,7 +10,7 @@ public class SQRTCommand extends Command {
 
 	public SQRTCommand(Object[] args) throws WrongArgumentsException {
 		super(args);
-		if(args.length != 1) {
+		if(args.length != ARGS_LENGTH) {
 			throw (new WrongArgumentsException());
 		}
 	}

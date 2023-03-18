@@ -7,7 +7,7 @@ public class DIVCommand extends Command {
 
 	public DIVCommand(Object[] args) throws WrongArgumentsException {
 		super(args);
-		if(args.length != 1) {
+		if(args.length != ARGS_LENGTH) {
 			throw (new WrongArgumentsException());
 		}
 	}

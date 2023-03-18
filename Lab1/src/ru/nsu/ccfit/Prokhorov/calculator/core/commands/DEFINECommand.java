@@ -10,15 +10,17 @@ public final class DEFINECommand extends Command {
 	private String name;
 	private Double value;
 	
+	protected int ARGS_LENGTH = 3;
+	
 	public DEFINECommand(Object[] args) throws WrongArgumentsException {
 		super(args);
-		if(!(args.length == 3) || !(args[0] instanceof Context) || !(args[1] instanceof String) || !(args[2] instanceof String)) {
+		if(!(args.length == ARGS_LENGTH) || !(args[CONTEXT_POSITION] instanceof Context) || !(args[FIRSTARG_POSITION] instanceof String) || !(args[SECONDARG_POSITION] instanceof String)) {
 			throw (new WrongArgumentsException());
 		}
-		context = (Context)args[0];
-		name = (String) args[1];
+		context = (Context)args[CONTEXT_POSITION];
+		name = (String) args[CONTEXT_POSITION];
 		try {
-			value = Double.parseDouble((String)args[2]);
+			value = Double.parseDouble((String)args[SECONDARG_POSITION]);
 		}catch(NumberFormatException e) {
 			throw (new WrongArgumentsException());
 		}

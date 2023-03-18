@@ -7,7 +7,7 @@ public final class PRINTCommand extends Command {
 
 	public PRINTCommand(Object[] args) throws WrongArgumentsException {
 		super(args);
-		if(args.length != 1) {
+		if(args.length != ARGS_LENGTH) {
 			throw (new WrongArgumentsException());
 		}
 	}

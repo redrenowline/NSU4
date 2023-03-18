@@ -6,7 +6,7 @@ public class MINUSCommand extends Command {
 
 	public MINUSCommand(Object[] args) throws WrongArgumentsException {
 		super(args);
-		if(args.length != 1) {
+		if(args.length != ARGS_LENGTH) {
 			throw (new WrongArgumentsException());
 		}
 	}

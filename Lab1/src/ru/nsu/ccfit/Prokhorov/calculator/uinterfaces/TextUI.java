@@ -49,7 +49,7 @@ public class TextUI {
 	
 	public TextUI(PrintStream o, String[] args){
 		this.ou = o;
-		this.resources = ResourceBundle.getBundle("ru.nsu.ccfit.Prokhorov.calculator.uinterfaces.UIResources", new Locale("ru"));
+		this.resources = ResourceBundle.getBundle("ru.nsu.ccfit.Prokhorov.calculator.uinterfaces.UIResources", new Locale(UIResources.currentLocalization));
 		this.cont = new Context();
 		this.factory = new CommandsFactory(cont);
 		this.md = MODE.OFFLINEMODE;
@@ -59,7 +59,7 @@ public class TextUI {
 	public TextUI(PrintStream o, InputStream i) {
 		this.ou = o;
 		this.in = i;
-		this.resources = ResourceBundle.getBundle("ru.nsu.ccfit.Prokhorov.calculator.uinterfaces.UIResources", new Locale("en"));
+		this.resources = ResourceBundle.getBundle("ru.nsu.ccfit.Prokhorov.calculator.uinterfaces.UIResources", new Locale(UIResources.currentLocalization));
 		this.cont = new Context();
 		this.factory = new CommandsFactory(cont);
 		this.md = MODE.ONLINEMODE;
@@ -93,12 +93,20 @@ public class TextUI {
 				log.info(String.format(LogStrings.CREATENEWCOMMAND, strl));;
 			}catch(WrongCommandException e) {
 				ou.print(resources.getString(UIResources.WRONGCOMMAND_ID));
+				log.log(Level.SEVERE, resources.getString(UIResources.WRONGCOMMAND_ID));
+				continue;
 			}catch(WrongArgumentsException e){
 				ou.print(resources.getString(UIResources.WRONGARGUMENT_ID));
+				log.log(Level.SEVERE, resources.getString(UIResources.WRONGARGUMENT_ID));
+				continue;
 			}catch(FactorySystemError e) {
 				ou.print(resources.getString(UIResources.FACTORYSYSTEMERROR_ID));
+				log.log(Level.SEVERE, resources.getString(UIResources.FACTORYSYSTEMERROR_ID));
+				continue;
 			} catch (ExecutionCommandException e) {
 				ou.print(resources.getString(UIResources.WRONGCOMMNADEXECUTION_ID));
+				log.log(Level.SEVERE, resources.getString(UIResources.WRONGCOMMNADEXECUTION_ID));
+				continue;
 			}
 		}
 		sc.close();
@@ -126,15 +134,19 @@ public class TextUI {
 					factory.createComand(sstrl).exec();
 				}catch(WrongCommandException e) {
 					ou.print(resources.getString(UIResources.WRONGCOMMAND_ID));
+					log.log(Level.SEVERE, resources.getString(UIResources.WRONGCOMMAND_ID));
 					continue;
 				}catch(WrongArgumentsException e){
 					ou.print(resources.getString(UIResources.WRONGARGUMENT_ID));
+					log.log(Level.SEVERE, resources.getString(UIResources.WRONGARGUMENT_ID));
 					continue;
 				}catch(FactorySystemError e) {
 					ou.print(resources.getString(UIResources.FACTORYSYSTEMERROR_ID));
+					log.log(Level.SEVERE, resources.getString(UIResources.FACTORYSYSTEMERROR_ID));
 					continue;
 				} catch (ExecutionCommandException e) {
 					ou.print(resources.getString(UIResources.WRONGCOMMNADEXECUTION_ID));
+					log.log(Level.SEVERE, resources.getString(UIResources.WRONGCOMMNADEXECUTION_ID));
 					continue;
 				}
 			}

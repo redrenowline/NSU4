@@ -19,15 +19,5 @@ public class PUSHTest {
 		}
 		assertTrue(cont.see() == 5);
 	}
-	
-	@Test 
-	public void TestException1() {
-		
-	}
-	
-	@Test
-	public void TestException2() {
-		
-	}
 
 }

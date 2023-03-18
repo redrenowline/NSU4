@@ -10,16 +10,18 @@ public class PUSHCommand extends Command {
 	Double value;
 	String key = null;
 	
+	protected int ARGS_LENGTH = 2;
+	
 	public PUSHCommand(Object[] args) throws WrongArgumentsException {
 		super(args);
-		if(args.length != 2 || !(args[0] instanceof Context) || !(args[1] instanceof String) ) {
+		if(args.length != ARGS_LENGTH || !(args[CONTEXT_POSITION] instanceof Context) || !(args[FIRSTARG_POSITION] instanceof String) ) {
 			throw (new WrongArgumentsException());
 		}
-		context = (Context)this.args[0];
+		context = (Context)this.args[CONTEXT_POSITION];
 		try {
-			value = Double.parseDouble(((String)this.args[1]));
+			value = Double.parseDouble(((String)this.args[FIRSTARG_POSITION]));
 		}catch(NumberFormatException e) {
-			key = (String)this.args[1];
+			key = (String)this.args[FIRSTARG_POSITION];
 		}
 	}
 
