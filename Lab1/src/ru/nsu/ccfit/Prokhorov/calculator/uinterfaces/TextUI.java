@@ -7,6 +7,9 @@ import java.io.PrintStream;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.ExecutionCommandException;
 import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.FactorySystemError;
@@ -17,6 +20,21 @@ import ru.nsu.ccfit.Prokhorov.calculator.core.context.Context;
 import ru.nsu.ccfit.Prokhorov.calculator.put.files.StringGetter;
 
 public class TextUI {
+	
+	private static final Logger log = Logger.getLogger(TextUI.class.getName());
+	private static FileHandler fl;
+	
+	static {
+		try {
+			fl = new FileHandler("calc.log");
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		log.addHandler(fl);
+		log.setLevel(Level.OFF);
+	}
 	
 	private Context cont;
 	
@@ -35,15 +53,17 @@ public class TextUI {
 		this.cont = new Context();
 		this.factory = new CommandsFactory(cont);
 		this.md = MODE.OFFLINEMODE;
+		log.info(LogStrings.STARTOFFLINEMODE);
 	}
 	
 	public TextUI(PrintStream o, InputStream i) {
 		this.ou = o;
 		this.in = i;
-		this.resources = ResourceBundle.getBundle("ru.nsu.ccfit.Prokhorov.calculator.uinterfaces.UIResources", new Locale("ru"));
+		this.resources = ResourceBundle.getBundle("ru.nsu.ccfit.Prokhorov.calculator.uinterfaces.UIResources", new Locale("en"));
 		this.cont = new Context();
 		this.factory = new CommandsFactory(cont);
 		this.md = MODE.ONLINEMODE;
+		log.info(LogStrings.STARTONLINEMODE);
 	}
 	
 	public void start() {
@@ -53,6 +73,7 @@ public class TextUI {
 		}else {
 			offlineModeExecution(null);
 		}
+		log.info(LogStrings.STARTOFFLINEMODE);
 	}
 	
 	public void onlineModeExecution() {
@@ -63,8 +84,13 @@ public class TextUI {
 			if(strl.startsWith(UIResources.COMMENT_STRING)) {
 				continue;
 			}
+			if(strl.startsWith(UIResources.HELPCOMMAND)) {
+				ou.print(resources.getString(UIResources.HELPCOMMAND_ID));
+				continue;
+			}
 			try {
 				factory.createComand(strl).exec();
+				log.info(String.format(LogStrings.CREATENEWCOMMAND, strl));;
 			}catch(WrongCommandException e) {
 				ou.print(resources.getString(UIResources.WRONGCOMMAND_ID));
 			}catch(WrongArgumentsException e){
@@ -90,6 +116,10 @@ public class TextUI {
 		try {
 			while((sstrl = getter.getString())!= null) {
 				if(sstrl.startsWith(UIResources.COMMENT_STRING)) {
+					continue;
+				}
+				if(sstrl.startsWith(UIResources.HELPCOMMAND)) {
+					ou.print(resources.getString(UIResources.HELPCOMMAND_ID));
 					continue;
 				}
 				try {

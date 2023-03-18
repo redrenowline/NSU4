@@ -12,6 +12,8 @@ public class UIResources {
 	public static String WRONGCOMMNADEXECUTION_ID = "6";
 	public static String FILENOTFOUNT_ID = "7";
 	public static String IOEXCEPTION_ID = "8";
+	public static String HELPCOMMAND_ID = "9"; 
 	
 	public static String COMMENT_STRING = "#";
+	public static String HELPCOMMAND = "HELP";
 }

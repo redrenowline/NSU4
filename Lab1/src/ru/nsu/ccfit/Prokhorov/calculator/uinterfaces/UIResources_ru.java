@@ -14,7 +14,8 @@ public class UIResources_ru extends ListResourceBundle {
 			{UIResources.FACTORYSYSTEMERROR_ID, "При создании команды произошла неизвестная ошибка, попробуйте обновить версию калькулятора \n"},
 			{UIResources.WRONGCOMMNADEXECUTION_ID, "Эта команда работает не так!\n"},
 			{UIResources.FILENOTFOUNT_ID, "Данный файл не найден, попробуйте открыть другой!\n"},
-			{UIResources.IOEXCEPTION_ID, "Ошибка чтения, проверьте файл на целостность!\n"}
+			{UIResources.IOEXCEPTION_ID, "Ошибка чтения, проверьте файл на целостность!\n"},
+			{UIResources.HELPCOMMAND_ID, "Чтобы получить помощь напишите письмо на sergeyproinb@gmail.com"}
 		};
 	}
 }
