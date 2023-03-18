@@ -24,9 +24,11 @@ public class TextUI {
 	private static final Logger log = Logger.getLogger(TextUI.class.getName());
 	private static FileHandler fl;
 	
+	private static String filename = "calc.log";
+	
 	static {
 		try {
-			fl = new FileHandler("calc.log");
+			fl = new FileHandler(filename);
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
