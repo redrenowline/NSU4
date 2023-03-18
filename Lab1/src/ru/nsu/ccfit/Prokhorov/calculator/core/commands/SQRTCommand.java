@@ -8,6 +8,8 @@ import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.WrongCommandEx
 
 public class SQRTCommand extends Command {
 
+	
+	protected int ARGS_LENGTH = 1;
 	public SQRTCommand(Object[] args) throws WrongArgumentsException {
 		super(args);
 		if(args.length != ARGS_LENGTH) {

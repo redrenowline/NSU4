@@ -5,6 +5,7 @@ import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.WrongArguments
 
 public class POPCommand extends Command {
 
+	protected int ARGS_LENGTH = 1;
 	
 	public POPCommand(Object[] args) throws WrongArgumentsException {
 		super(args);

@@ -4,6 +4,8 @@ import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.ExecutionComma
 import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.WrongArgumentsException;
 public class MINUSCommand extends Command {
 
+	
+	protected int ARGS_LENGTH = 1;
 	public MINUSCommand(Object[] args) throws WrongArgumentsException {
 		super(args);
 		if(args.length != ARGS_LENGTH) {

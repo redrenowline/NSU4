@@ -5,6 +5,8 @@ import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.WrongArguments
 
 public final class PRINTCommand extends Command {
 
+	protected int ARGS_LENGTH = 1;
+	
 	public PRINTCommand(Object[] args) throws WrongArgumentsException {
 		super(args);
 		if(args.length != ARGS_LENGTH) {

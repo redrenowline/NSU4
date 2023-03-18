@@ -5,6 +5,8 @@ import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.WrongArguments
 
 public class DIVCommand extends Command {
 
+	
+	protected int ARGS_LENGTH = 1;
 	public DIVCommand(Object[] args) throws WrongArgumentsException {
 		super(args);
 		if(args.length != ARGS_LENGTH) {

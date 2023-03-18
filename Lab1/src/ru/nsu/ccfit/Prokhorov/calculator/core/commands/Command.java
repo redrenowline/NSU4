@@ -9,11 +9,9 @@ public abstract class Command{
 	protected Object[] args;
 	protected Context context;
 	
-	protected final int CONTEXT_POSITION = 1;
-	protected final int FIRSTARG_POSITION = 2;
-	protected final int SECONDARG_POSITION = 3;
-	
-	protected int ARGS_LENGTH = 1;
+	protected final int CONTEXT_POSITION = 0;
+	protected final int FIRSTARG_POSITION = 1;
+	protected final int SECONDARG_POSITION = 2;
 	
 	public Command(Object[] args) throws WrongArgumentsException {
 		this.args = args;
