@@ -16,6 +16,8 @@ public class CommandsFactory {
 	private Context context;
 	private Properties prop;
 	
+	private final String DELETER = " ";
+	
 	public CommandsFactory(Context context){
 		this.context = context;
 		InputStream stream = CommandsFactory.class.getResourceAsStream("FactoryResources.properties");
@@ -28,7 +30,7 @@ public class CommandsFactory {
 	}
 	
 	public Command createComand(String strl) throws WrongCommandException, FactorySystemError {
-		String[] parsed = strl.split(" ");
+		String[] parsed = strl.split(DELETER);
 		String commandName = parsed[0];
 		String className = prop.getProperty(commandName);
 		Class<Command> commandClass;

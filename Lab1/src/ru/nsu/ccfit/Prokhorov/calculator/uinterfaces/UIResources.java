@@ -16,4 +16,6 @@ public class UIResources {
 	
 	public static String COMMENT_STRING = "#";
 	public static String HELPCOMMAND = "HELP";
+	public static String EXITCOMMAND = "exit";
+	public static String STARTCOMMAND = "start";
 }

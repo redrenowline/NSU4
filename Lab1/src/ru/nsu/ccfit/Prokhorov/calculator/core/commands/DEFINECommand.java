@@ -3,6 +3,7 @@ package ru.nsu.ccfit.Prokhorov.calculator.core.commands;
 import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.ExecutionCommandException;
 import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.WrongArgumentsException;
 import ru.nsu.ccfit.Prokhorov.calculator.core.context.Context;
+import ru.nsu.ccfit.Prokhorov.calculator.core.context.NotFoundElementInContextException;
 
 public final class DEFINECommand extends Command {
 
@@ -25,7 +26,11 @@ public final class DEFINECommand extends Command {
 
 	@Override
 	public void exec()  throws ExecutionCommandException{
-		context.addValue(name, value);
+		try {
+			context.addValue(name, value);
+		} catch (NotFoundElementInContextException e) {
+			throw (new ExecutionCommandException());
+		}
 	}
 
 }

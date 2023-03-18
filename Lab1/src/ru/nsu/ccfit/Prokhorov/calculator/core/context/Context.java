@@ -16,9 +16,9 @@ public class Context {
 		stack = new Stack<Double>();
 	}
 	
-	public void addValue(String name, Double value) {
+	public void addValue(String name, Double value) throws NotFoundElementInContextException {
 		if(values.put(name, value) == null) {
-			//throw exception
+			throw (new NotFoundElementInContextException());
 		}
 	}
 	

@@ -33,7 +33,7 @@ public class TextUI {
 			e.printStackTrace();
 		}
 		log.addHandler(fl);
-		log.setLevel(Level.OFF);
+		log.setUseParentHandlers(false);
 	}
 	
 	private Context cont;
@@ -78,8 +78,8 @@ public class TextUI {
 	
 	public void onlineModeExecution() {
 		Scanner sc = new Scanner(this.in);
-		String strl = "start";
-		while(strl != "exit"){
+		String strl = UIResources.STARTCOMMAND;
+		while(strl != UIResources.EXITCOMMAND){
 			strl = sc.nextLine();
 			if(strl.startsWith(UIResources.COMMENT_STRING)) {
 				continue;
