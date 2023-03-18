@@ -17,7 +17,7 @@ public class Context {
 	}
 	
 	public void addValue(String name, Double value) throws NotFoundElementInContextException {
-		if(values.put(name, value) == null) {
+		if(values.put(name, value) != null) {
 			throw (new NotFoundElementInContextException());
 		}
 	}

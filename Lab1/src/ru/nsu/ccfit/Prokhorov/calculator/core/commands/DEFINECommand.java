@@ -18,7 +18,7 @@ public final class DEFINECommand extends Command {
 			throw (new WrongArgumentsException());
 		}
 		context = (Context)args[CONTEXT_POSITION];
-		name = (String) args[CONTEXT_POSITION];
+		name = (String) args[FIRSTARG_POSITION];
 		try {
 			value = Double.parseDouble((String)args[SECONDARG_POSITION]);
 		}catch(NumberFormatException e) {
