@@ -15,7 +15,8 @@ public class UIResources_en extends ListResourceBundle {
 			{UIResources.WRONGCOMMNADEXECUTION_ID, "This command doesn't work truly!\n"},
 			{UIResources.FILENOTFOUNT_ID, "This file can't be opened, please try again!\n"},
 			{UIResources.IOEXCEPTION_ID, "This file cannot be readen!\n"},
-			{UIResources.HELPCOMMAND_ID, "Write to sergeyproinb@gmail.com to get help!\n"}
+			{UIResources.HELPCOMMAND_ID, "Write to sergeyproinb@gmail.com to get help!\n"},
+			{UIResources.CALCULATIONERROR_ID, "The result is Nan. Your actions goes against Math laws.\n"}
 		};
 	}
 

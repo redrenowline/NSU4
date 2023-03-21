@@ -11,6 +11,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.CalculationException;
 import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.ExecutionCommandException;
 import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.FactorySystemError;
 import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.WrongArgumentsException;
@@ -90,9 +91,22 @@ public class TextUI {
 				ou.print(resources.getString(UIResources.HELPCOMMAND_ID));
 				continue;
 			}
+			if(strl.startsWith(UIResources.CHANGELANGCOMMAND)) {
+				if(UIResources.currentLocalization == "ru") {
+					UIResources.currentLocalization = "en";
+				}else {
+					UIResources.currentLocalization = "ru";
+				}
+				this.resources = ResourceBundle.getBundle("ru.nsu.ccfit.Prokhorov.calculator.uinterfaces.UIResources", new Locale(UIResources.currentLocalization));
+				continue;
+			}
 			try {
 				factory.createComand(strl).exec();
 				log.info(String.format(LogStrings.CREATENEWCOMMAND, strl));;
+			}catch(CalculationException e) {
+				ou.print(resources.getString(UIResources.CALCULATIONERROR_ID));
+				log.log(Level.SEVERE, resources.getString(UIResources.WRONGCOMMAND_ID));
+				continue;
 			}catch(WrongCommandException e) {
 				ou.print(resources.getString(UIResources.WRONGCOMMAND_ID));
 				log.log(Level.SEVERE, resources.getString(UIResources.WRONGCOMMAND_ID));

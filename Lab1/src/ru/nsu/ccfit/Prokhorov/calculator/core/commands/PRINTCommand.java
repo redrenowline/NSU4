@@ -1,5 +1,6 @@
 package ru.nsu.ccfit.Prokhorov.calculator.core.commands;
 
+import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.CalculationException;
 import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.ExecutionCommandException;
 import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.WrongArgumentsException;
 
@@ -15,7 +16,7 @@ public final class PRINTCommand extends Command {
 	}
 
 	@Override
-	public void exec()  throws ExecutionCommandException {
+	public void exec()  throws ExecutionCommandException, CalculationException {
 		System.out.print(context.see() + "\n");
 	}
 

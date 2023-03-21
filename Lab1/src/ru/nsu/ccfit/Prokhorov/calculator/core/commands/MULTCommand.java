@@ -1,5 +1,6 @@
 package ru.nsu.ccfit.Prokhorov.calculator.core.commands;
 
+import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.CalculationException;
 import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.ExecutionCommandException;
 import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.WrongArgumentsException;
 
@@ -15,7 +16,7 @@ public class MULTCommand extends Command {
 	}
 
 	@Override
-	public void exec()  throws ExecutionCommandException {
+	public void exec()  throws ExecutionCommandException, CalculationException {
 		Double fs = null, sc = null;
 		try {
 			fs = context.getValueFromStack();

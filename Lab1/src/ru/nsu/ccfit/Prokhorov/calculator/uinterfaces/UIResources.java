@@ -13,11 +13,13 @@ public class UIResources {
 	public static String FILENOTFOUNT_ID = "7";
 	public static String IOEXCEPTION_ID = "8";
 	public static String HELPCOMMAND_ID = "9"; 
+	public static String CALCULATIONERROR_ID = "10"; 
 	
 	public static String COMMENT_STRING = "#";
 	public static String HELPCOMMAND = "HELP";
 	public static String EXITCOMMAND = "exit";
 	public static String STARTCOMMAND = "start";
+	public static String CHANGELANGCOMMAND = "changelang";
 	
 	public static String currentLocalization = "en";
 }

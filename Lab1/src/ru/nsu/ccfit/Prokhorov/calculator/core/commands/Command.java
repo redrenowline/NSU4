@@ -1,5 +1,6 @@
 package ru.nsu.ccfit.Prokhorov.calculator.core.commands;
 
+import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.CalculationException;
 import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.ExecutionCommandException;
 import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.WrongArgumentsException;
 import ru.nsu.ccfit.Prokhorov.calculator.core.context.Context;
@@ -18,6 +19,6 @@ public abstract class Command{
 		context = (Context) args[CONTEXT_POSITION];
 	}
 	
-	public abstract void exec()  throws ExecutionCommandException;
+	public abstract void exec()  throws ExecutionCommandException, CalculationException;
 	
 }

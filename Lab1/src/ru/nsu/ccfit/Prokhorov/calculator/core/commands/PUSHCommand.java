@@ -1,5 +1,6 @@
 package ru.nsu.ccfit.Prokhorov.calculator.core.commands;
 
+import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.CalculationException;
 import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.ExecutionCommandException;
 import ru.nsu.ccfit.Prokhorov.calculator.core.commands.exceptions.WrongArgumentsException;
 import ru.nsu.ccfit.Prokhorov.calculator.core.context.Context;
@@ -26,7 +27,7 @@ public class PUSHCommand extends Command {
 	}
 
 	@Override
-	public void exec()  throws ExecutionCommandException {
+	public void exec()  throws ExecutionCommandException, CalculationException {
 		if(key == null)
 			context.addValueToStack(value);
 		else

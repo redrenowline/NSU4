@@ -15,7 +15,8 @@ public class UIResources_ru extends ListResourceBundle {
 			{UIResources.WRONGCOMMNADEXECUTION_ID, "Эта команда работает не так!\n"},
 			{UIResources.FILENOTFOUNT_ID, "Данный файл не найден, попробуйте открыть другой!\n"},
 			{UIResources.IOEXCEPTION_ID, "Ошибка чтения, проверьте файл на целостность!\n"},
-			{UIResources.HELPCOMMAND_ID, "Чтобы получить помощь напишите письмо на sergeyproinb@gmail.com"}
+			{UIResources.HELPCOMMAND_ID, "Чтобы получить помощь напишите письмо на sergeyproinb@gmail.com"},
+			{UIResources.CALCULATIONERROR_ID, "Ошибка в вычислениях, полученый результат не число. Ваши действия противоречат законам математики.\n"}
 		};
 	}
 }
