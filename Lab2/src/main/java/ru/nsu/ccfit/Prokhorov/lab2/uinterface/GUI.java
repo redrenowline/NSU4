@@ -15,9 +15,7 @@ public class GUI {
         f.setExtendedState(JFrame.MAXIMIZED_BOTH);
         f.setUndecorated(true);
         f.setVisible(true);
-        MainWidget mn = new MainWidget();
-//        mn.initTextures();
-//        mn.redrawWithMask(core.currFloor.getCurrRoom().getTileMask());
+        MainWidget mn = new MainWidget(core.currFloor.getCurrRoom().getTileMask());
         mn.setBounds(0,0,800,800);
         f.getContentPane().add(mn);
     }

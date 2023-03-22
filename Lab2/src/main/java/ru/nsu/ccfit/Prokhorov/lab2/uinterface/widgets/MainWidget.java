@@ -12,11 +12,9 @@ public class MainWidget extends JPanel
 
     int[][] mask;
 
-    public void initTextures(){
+    public MainWidget(int[][] mask){
         pEarth = new TexturePaint(TexturesLoader.loadImage(TextureLoaderConfig.earth_texture_path), new Rectangle(0,0,32,32));
         pWall = new TexturePaint(TexturesLoader.loadImage(TextureLoaderConfig.wall_texture_path), new Rectangle(0,0,32,32));
-    }
-    public void redrawWithMask(int[][] mask){
         this.mask = mask;
     }
 
@@ -44,7 +42,7 @@ public class MainWidget extends JPanel
 
     @Override
     public void paint(Graphics g){
-        super.paintComponent(g);
+        super.paint(g);
         System.out.print("We start drawing\n");
         Graphics2D g2d = (Graphics2D) g;
         drawComponents(g2d);
