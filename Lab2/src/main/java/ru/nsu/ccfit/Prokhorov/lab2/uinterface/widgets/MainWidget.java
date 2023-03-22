@@ -7,42 +7,51 @@ import java.awt.*;
 
 public class MainWidget extends JPanel
 {
-    TexturePaint pEarth;
-    TexturePaint pWall;
+    TexturePaint pSpace, pEarth, pUnseen;
 
-    int[][] mask;
+    private int[][] mask;
 
     public MainWidget(int[][] mask){
+        super();
+        pSpace = new TexturePaint(TexturesLoader.loadImage(TextureLoaderConfig.space_texture_path), new Rectangle(0,0,32,32));
         pEarth = new TexturePaint(TexturesLoader.loadImage(TextureLoaderConfig.earth_texture_path), new Rectangle(0,0,32,32));
-        pWall = new TexturePaint(TexturesLoader.loadImage(TextureLoaderConfig.wall_texture_path), new Rectangle(0,0,32,32));
+        pUnseen = new TexturePaint(TexturesLoader.loadImage(TextureLoaderConfig.unseen_texture_path), new Rectangle(0,0,32,32));
         this.mask = mask;
+    }
+
+    public void updateField(int[][] mask){
+        this.mask = mask;
+        this.repaint();
     }
 
     public void drawComponents(Graphics2D g2d){
         for(int i = 0; i < mask.length; i++){
             for(int j = 0; j < mask[i].length; j++){
+                g2d.setPaint(pEarth);
+                g2d.fillRect((i)*32,(j)*32,(i+1)*32,(j+1)*32);
                 switch(mask[i][j]){
                     case MasksForOutput.SPACE:
-                        g2d.setPaint(pEarth);
-                        g2d.fillRect((i)*32,(j)*32,(i+1)*32,(j+1)*32);
+                        g2d.setPaint(pSpace);
                         break;
                     case MasksForOutput.EARTH:
-                        g2d.setPaint(pWall);
-                        g2d.fillRect((i)*32,(j)*32,(i+1)*32,(j+1)*32);
+                        g2d.setPaint(pEarth);
                         break;
+                        case MasksForOutput.UNSEEN:
+                            g2d.setPaint(pUnseen);
+                            break;
                     default:
                         g2d.setPaint(pEarth);
-                        g2d.fillRect((i)*32,(j)*32,(i+1)*32,(j+1)*32);
                         break;
                 }
+                g2d.fillRect((i)*32,(j)*32,(i+1)*32,(j+1)*32);
             }
         }
         System.out.print("Tututuutu");
     }
 
     @Override
-    public void paint(Graphics g){
-        super.paint(g);
+    public void paintComponent(Graphics g){
+        super.paintComponent(g);
         System.out.print("We start drawing\n");
         Graphics2D g2d = (Graphics2D) g;
         drawComponents(g2d);

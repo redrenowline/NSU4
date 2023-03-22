@@ -11,7 +11,7 @@ public class TexturesLoader {
     public static BufferedImage loadImage(String path) {
         BufferedImage res = null;
         try {
-            res = ImageIO.read(new File(TextureLoaderConfig.earth_texture_path));
+            res = ImageIO.read(new File(path));
         } catch (IOException e) {
             e.printStackTrace();
         }
