@@ -1,7 +1,6 @@
 package ru.nsu.ccfit.Prokhorov.lab2.core.characters.factories;
 
 import ru.nsu.ccfit.Prokhorov.lab2.core.characters.Creature;
-import ru.nsu.ccfit.Prokhorov.lab2.core.context.Context;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,11 +9,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Properties;
 
 public class EnemyFactory {
-    private Context cont;
     private Properties races;
 
-    public EnemyFactory(Context cont){
-        this.cont = cont;
+    public EnemyFactory(){
         InputStream stream = EnemyFactory.class.getResourceAsStream("races.properties");
         races = new Properties();
         try {

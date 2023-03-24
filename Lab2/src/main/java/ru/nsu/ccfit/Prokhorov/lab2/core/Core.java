@@ -3,6 +3,7 @@ package ru.nsu.ccfit.Prokhorov.lab2.core;
 import ru.nsu.ccfit.Prokhorov.lab2.core.characters.Creature;
 import ru.nsu.ccfit.Prokhorov.lab2.core.characters.races.Human;
 import ru.nsu.ccfit.Prokhorov.lab2.core.field.Field;
+import ru.nsu.ccfit.Prokhorov.lab2.core.time.Effect;
 import ru.nsu.ccfit.Prokhorov.lab2.core.time.Timeline;
 
 public class Core {
@@ -16,5 +17,9 @@ public class Core {
         currField = new Field();
         hero = new Human("0001");
         timeline = new Timeline();
+    }
+
+    public void addEffectToTimeLine(Effect effect){
+        timeline.subscribes.add(effect);
     }
 }
