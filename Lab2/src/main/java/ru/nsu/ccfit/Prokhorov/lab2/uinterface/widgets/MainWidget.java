@@ -46,7 +46,6 @@ public class MainWidget extends JPanel
                 g2d.fillRect((i)*32,(j)*32,(i+1)*32,(j+1)*32);
             }
         }
-        System.out.print("Tututuutu");
     }
 
     @Override

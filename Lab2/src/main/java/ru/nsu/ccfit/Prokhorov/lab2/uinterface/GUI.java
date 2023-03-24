@@ -19,9 +19,10 @@ public class GUI {
         f.setExtendedState(JFrame.MAXIMIZED_BOTH);
         f.setUndecorated(true);
         f.setVisible(true);
-        MainWidget mn = new MainWidget(core.currFloor.getCurrRoom().getTileMask());
+        MainWidget mn = new MainWidget(core.currField.getCurrRoom().getTileMask());
         mn.setBounds(10,10, (MasksForOutput.ALIGHTOP + MasksForOutput.ALIGNBOTTOM + 1)*32,(MasksForOutput.ALIGHTOP + MasksForOutput.ALIGNBOTTOM + 1)*32);
         f.add(mn);
         mn.repaint();
+
     }
 }
