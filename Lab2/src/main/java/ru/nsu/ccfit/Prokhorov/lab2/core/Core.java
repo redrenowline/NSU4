@@ -1,7 +1,7 @@
 package ru.nsu.ccfit.Prokhorov.lab2.core;
 
 import ru.nsu.ccfit.Prokhorov.lab2.core.characters.Creature;
-import ru.nsu.ccfit.Prokhorov.lab2.core.characters.races.Human;
+import ru.nsu.ccfit.Prokhorov.lab2.library.races.Human;
 import ru.nsu.ccfit.Prokhorov.lab2.core.field.Field;
 import ru.nsu.ccfit.Prokhorov.lab2.core.time.Effect;
 import ru.nsu.ccfit.Prokhorov.lab2.core.time.Timeline;
@@ -19,7 +19,15 @@ public class Core {
         timeline = new Timeline();
     }
 
+    public Timeline getTimeline(){
+        return timeline;
+    }
+
+    public Field getCurrField(){
+        return currField;
+    }
+
     public void addEffectToTimeLine(Effect effect){
-        timeline.subscribes.add(effect);
+        timeline.subsEffects.add(effect);
     }
 }

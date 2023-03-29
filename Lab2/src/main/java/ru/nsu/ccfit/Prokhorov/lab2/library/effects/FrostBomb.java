@@ -1,4 +1,4 @@
-package ru.nsu.ccfit.Prokhorov.lab2.core.time.effects;
+package ru.nsu.ccfit.Prokhorov.lab2.library.effects;
 
 import ru.nsu.ccfit.Prokhorov.lab2.core.characters.Creature;
 import ru.nsu.ccfit.Prokhorov.lab2.core.time.Effect;

@@ -6,20 +6,23 @@ import java.util.Vector;
 public class Timeline {
 
     public List<Event> subscribes;
+    public List<Effect> subsEffects;
 
     public Timeline(){
         subscribes = new Vector<Event>();
+        subsEffects = new Vector<Effect>();
     }
 
     public void updateAll(){
-        int n = subscribes.size();
-        for (Event ev: subscribes) {
+        for (Event ev: subsEffects) {
             ev.update();
         }
-        for (Event ev: subscribes) {
+        List<Effect> del = new Vector<Effect>();
+        for (Effect ev: subsEffects) {
             if(ev.isFinished()){
-                subscribes.remove(ev);
+                del.add(ev);
             }
         }
+        subsEffects.removeAll(del);
     }
 }

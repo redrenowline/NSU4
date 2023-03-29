@@ -1,4 +1,4 @@
-package ru.nsu.ccfit.Prokhorov.lab2.core.characters.races;
+package ru.nsu.ccfit.Prokhorov.lab2.library.races;
 
 import ru.nsu.ccfit.Prokhorov.lab2.core.characters.Creature;
 import ru.nsu.ccfit.Prokhorov.lab2.core.characters.equipmodel.HumanEquipModel;

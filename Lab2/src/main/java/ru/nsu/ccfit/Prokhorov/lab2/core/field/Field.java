@@ -1,6 +1,6 @@
 package ru.nsu.ccfit.Prokhorov.lab2.core.field;
 
-import ru.nsu.ccfit.Prokhorov.lab2.core.characters.races.Human;
+import ru.nsu.ccfit.Prokhorov.lab2.library.races.Human;
 
 public class Field {
 
