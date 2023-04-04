@@ -11,7 +11,7 @@ public class TextUI {
 
     private Field fd;
     public TextUI(){
-        fd = new Field();
+
     }
 
     public void start(){

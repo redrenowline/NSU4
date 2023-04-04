@@ -1,8 +1,10 @@
-package ru.nsu.ccfit.Prokhorov.lab2.uinterface.widgets;
+package ru.nsu.ccfit.Prokhorov.lab2.uinterface;
 
 import org.w3c.dom.css.Rect;
 import ru.nsu.ccfit.Prokhorov.lab2.core.Core;
 import ru.nsu.ccfit.Prokhorov.lab2.core.field.MasksForOutput;
+import ru.nsu.ccfit.Prokhorov.lab2.uinterface.widgets.MainWidget;
+import ru.nsu.ccfit.Prokhorov.lab2.uinterface.widgets.PlayerShowcase;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,13 +12,8 @@ import java.awt.geom.Rectangle2D;
 
 public class GameUI extends JFrame {
 
-    GridBagLayout layout;
     private Core core;
     private MainWidget mn;
-    private JLabel name;
-
-    private Font font;
-
     private Rectangle borderMN;
     private Rectangle borderName;
     public GameUI(Core core){
@@ -29,28 +26,27 @@ public class GameUI extends JFrame {
     }
 
     private void initMyself(){
-        getContentPane().setBackground( Color.white );
+        setDefaultCloseOperation( EXIT_ON_CLOSE );
+        getContentPane().setBackground( Color.black );
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setUndecorated(true);
         setVisible(true);
         setLayout(null);
 
-        font = new Font("TimesRoman", Font.CENTER_BASELINE, 16);
-
         mn = new MainWidget(core.currField.getCurrRoom().getTileMask());
-        borderMN = new Rectangle (5,5,(MasksForOutput.ALIGHTOP + MasksForOutput.ALIGNBOTTOM + 1)*32,(MasksForOutput.ALIGNRIGHT+ MasksForOutput.ALIGNLEFT+ 1)*32);
+        borderMN = new Rectangle (300,5,(MasksForOutput.ALIGHTOP + MasksForOutput.ALIGNBOTTOM + 1)*32,(MasksForOutput.ALIGNRIGHT+ MasksForOutput.ALIGNLEFT+ 1)*32);
         mn.setBounds(borderMN);
         add(mn);
         mn.repaint();
 
-        name = new JLabel();
-        borderName = new Rectangle(borderMN.y + borderMN.height + 50, 10, 100,20);
-        name.setBounds(borderName);
-        name.setText("Hero name");
-        name.setFont(font);
+        PlayerShowcase pl = new PlayerShowcase();
+        pl.update(core.player.getCharacteristics());
+        borderName = new Rectangle(0, 0,300,675);
+        pl.setBounds(borderName);
+        add(pl);
+        pl.repaint();
 
-        add(name);
-        name.repaint();
         setVisible(true);
+        repaint();
     }
 }

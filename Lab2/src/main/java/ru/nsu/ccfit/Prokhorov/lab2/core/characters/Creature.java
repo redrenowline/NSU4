@@ -17,6 +17,9 @@ public abstract class Creature {
             this.characteristics[i] = Double.valueOf(1);
         }
     }
+    public Double[] getCharacteristics(){
+        return characteristics;
+    }
     public EquipModel getEquipmentModel(){
         return equipModel;
     }

@@ -28,7 +28,7 @@ public class MainWidget extends JPanel
         for(int i = 0; i < mask.length; i++){
             for(int j = 0; j < mask[i].length; j++){
                 g2d.setPaint(pEarth);
-                g2d.fillRect((i)*32,(j)*32,(i+1)*32,(j+1)*32);
+                g2d.fillRect(this.getX() + (i)*32,this.getY() + (j)*32,this.getX() + (i+1)*32,this.getY() + (j+1)*32);
                 switch(mask[i][j]){
                     case MasksForOutput.SPACE:
                         g2d.setPaint(pSpace);
