@@ -8,14 +8,9 @@ public class Field {
     private Room[][] rooms;
     private Room currRoom;
 
-    public Field(int h, int w){
+    public Field(int h, int w, Room start){
         rooms = new Room[h][w];
-        for(int i = 0 ; i < h; i++){
-            for(int j = 0; j < w; j++){
-                rooms[i][j] = RoomGenerator.generateRandomRoom();
-            }
-        }
-        currRoom = rooms[0][0];
+        currRoom = start;
     }
 
     public Room getCurrRoom(){

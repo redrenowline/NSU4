@@ -5,7 +5,7 @@ import ru.nsu.ccfit.Prokhorov.lab2.core.characters.Creature;
 
 public class Room {
 
-    private int playerX = 0, playerY = 0;
+    private int viewX = 0, viewY = 0;
     private Tile[][] tiles;
     private int height;
     private int width;
@@ -37,15 +37,15 @@ public class Room {
 
     public void setPlayer(Creature ch, int x, int y){
         tiles[x][y].setCharacter(ch);
-        this.playerX = x;
-        this.playerY = y;
+        this.viewX = x;
+        this.viewY = y;
     }
 
     public int[][] getTileMask(){
         int[][] res = new int[MasksForOutput.ALIGNRIGHT + MasksForOutput.ALIGNLEFT + 1][MasksForOutput.ALIGHTOP + MasksForOutput.ALIGNBOTTOM + 1];
-        for(int i = playerX - MasksForOutput.ALIGNLEFT; i < playerX + MasksForOutput.ALIGNRIGHT + 1; i++){
-            for(int j = playerY - MasksForOutput.ALIGHTOP; j < playerY + MasksForOutput.ALIGNBOTTOM + 1; j++){
-                int i0 = i - playerX + MasksForOutput.ALIGNLEFT,j0 = j - playerY + MasksForOutput.ALIGHTOP;
+        for(int i = viewX - MasksForOutput.ALIGNLEFT; i < viewX + MasksForOutput.ALIGNRIGHT + 1; i++){
+            for(int j = viewY - MasksForOutput.ALIGHTOP; j < viewY + MasksForOutput.ALIGNBOTTOM + 1; j++){
+                int i0 = i - viewX + MasksForOutput.ALIGNLEFT,j0 = j - viewY + MasksForOutput.ALIGHTOP;
                 if(i < 0 || j < 0 || i >= this.tiles.length || j >= this.tiles[i].length){
                     res[i0][j0] = MasksForOutput.UNSEEN;
                 }else
@@ -63,5 +63,12 @@ public class Room {
             }
         }
         return res;
+    }
+
+    public int getViewX(){
+        return viewX;
+    }
+    public int getViewY(){
+        return viewY;
     }
 }

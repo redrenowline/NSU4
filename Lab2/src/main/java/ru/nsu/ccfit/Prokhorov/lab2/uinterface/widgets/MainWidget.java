@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class MainWidget extends JPanel
 {
-    TexturePaint pSpace, pEarth, pUnseen;
+    TexturePaint pSpace, pEarth, pUnseen, pHero;
 
     private int[][] mask;
 
@@ -16,6 +16,7 @@ public class MainWidget extends JPanel
         pSpace = new TexturePaint(TexturesLoader.loadImage(TextureLoaderConfig.space_texture_path), new Rectangle(0,0,32,32));
         pEarth = new TexturePaint(TexturesLoader.loadImage(TextureLoaderConfig.earth_texture_path), new Rectangle(0,0,32,32));
         pUnseen = new TexturePaint(TexturesLoader.loadImage(TextureLoaderConfig.unseen_texture_path), new Rectangle(0,0,32,32));
+        pHero = new TexturePaint(TexturesLoader.loadImage(TextureLoaderConfig.hero_texture_path), new Rectangle(0,0,32,32));
         this.mask = mask;
     }
 
@@ -39,6 +40,9 @@ public class MainWidget extends JPanel
                         case MasksForOutput.UNSEEN:
                             g2d.setPaint(pUnseen);
                             break;
+                    case MasksForOutput.HERO:
+                        g2d.setPaint(pHero);
+                        break;
                     default:
                         g2d.setPaint(pEarth);
                         break;
@@ -51,7 +55,6 @@ public class MainWidget extends JPanel
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        System.out.print("We start drawing\n");
         Graphics2D g2d = (Graphics2D) g;
         drawComponents(g2d);
     }
