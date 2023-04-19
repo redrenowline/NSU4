@@ -58,4 +58,5 @@ public class MainWidget extends JPanel
         Graphics2D g2d = (Graphics2D) g;
         drawComponents(g2d);
     }
+    
 }

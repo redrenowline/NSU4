@@ -40,11 +40,11 @@ public class CreatureHandler {
 
     public void moveCharacter(int dx,int dy){
         if(field.getCurrRoom().getTile(x,y).getCharacter() != null){
-            if(AccuracyCalculator.calcHit(body,field.getCurrRoom().getTile(x,y).getCharacter())){
-                DamageCalculator.dealDamage(field.getCurrRoom().getTile(x,y).getCharacter(), body, DamageCalculator.damagetype.PHYS, Creature.characteristicsTypes.STRENGTH);
+            if(AccuracyCalculator.calcHit(body,field.getCurrRoom().getTile(x + dx,y + dy).getCharacter())){
+                DamageCalculator.dealDamage(field.getCurrRoom().getTile(x + dx,y + dy).getCharacter(), body, DamageCalculator.damagetype.PHYS, Creature.characteristicsTypes.STRENGTH);
                 if(field.getCurrRoom().getTile(x + dx,y + dy).getCharacter().getCharacteristic(Creature.characteristicsTypes.LIFE) < 0 ){
-                    field.getCurrRoom().getTile(x,y).setCharacter(null);
-                    field.getCurrRoom().getTile(x,y).setCharacter(body);
+                    field.getCurrRoom().getTile(x + dx,y + dy).setCharacter(null);
+                    field.getCurrRoom().getTile(x + dx,y + dy).setCharacter(body);
                 }
             }
         }else{
