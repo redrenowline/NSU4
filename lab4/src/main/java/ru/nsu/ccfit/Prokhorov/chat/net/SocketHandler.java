@@ -7,7 +7,7 @@ import java.net.Socket;
 
 public class SocketHandler<T extends Parser> {
 
-    private T parser;
+    private Parser parser;
 
     private Socket socket;
     private UserHandler user;
@@ -15,7 +15,7 @@ public class SocketHandler<T extends Parser> {
     private BufferedReader reader;
     private BufferedWriter writer;
 
-    public SocketHandler(T parser, String hostname, int port){
+    public SocketHandler(Parser parser, String hostname, int port){
         this.parser = parser;
         try {
             socket = new Socket(hostname, port);
@@ -47,6 +47,12 @@ public class SocketHandler<T extends Parser> {
         }
     }
     public void sendMessage(String message){
-
+        try {
+            writer.write(message+'\n');
+            writer.flush();
+        } catch (IOException e) {
+            System.out.println("We got error");
+            throw new RuntimeException(e);
+        }
     }
 }
