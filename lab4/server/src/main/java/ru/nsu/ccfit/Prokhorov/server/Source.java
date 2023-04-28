@@ -6,5 +6,6 @@ public class Source {
 
     public static void main(String[] argc){
         Core core = new Core();
+        core.start();
     }
 }

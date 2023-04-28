@@ -1,22 +1,27 @@
 package ru.nsu.ccfit.Prokhorov.chat.net;
 
+import ru.nsu.ccfit.Prokhorov.chat.core.SocketListener;
 import ru.nsu.ccfit.Prokhorov.chat.parsers.Parser;
 
 import java.io.*;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-public class SocketHandler<T extends Parser> {
+public class SocketHandler<T extends Parser> implements Runnable{
 
+    private SocketListener listener;
     private Parser parser;
 
     private Socket socket;
-    private UserHandler user;
+    //private UserHandler user;
 
-    private BufferedReader reader;
     private BufferedWriter writer;
+    private BufferedReader reader;
 
-    public SocketHandler(Parser parser, String hostname, int port){
+    public SocketHandler(SocketListener listener,Parser parser, String hostname, int port){
         this.parser = parser;
+        this.listener = listener;
         try {
             socket = new Socket(hostname, port);
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -26,16 +31,17 @@ public class SocketHandler<T extends Parser> {
         }
 
     }
-    public boolean tryToLogin(String filepath) throws IOException {
-        user = new UserHandler(filepath);
-        writer.write(parser.parse(user));
-        String buff = reader.readLine();
-        if(parser.deparse(buff) == Keys.succLogin){
-            return true;
-        }else{
-            return false;
-        }
-    }
+//    public boolean tryToLogin(String filepath) throws IOException {
+//        user = new UserHandler(filepath);
+//        writer.write(parser.parse(user));
+//        //String buff = reader.readLine();
+////        if(parser.deparse(buff) == Keys.succLogin){
+// //           return true;
+// //       }else{
+// //           return false;
+//  //      }
+//        return true;
+//    }
 
     public void reconnect(String hostname, int port){
         try {
@@ -46,7 +52,7 @@ public class SocketHandler<T extends Parser> {
             throw new RuntimeException(e); // change it later
         }
     }
-    public void sendMessage(String message){
+    public synchronized void sendMessage(String message){
         try {
             writer.write(message+'\n');
             writer.flush();
@@ -54,5 +60,24 @@ public class SocketHandler<T extends Parser> {
             System.out.println("We got error");
             throw new RuntimeException(e);
         }
+    }
+
+    public void listen(){
+        while(socket.isConnected()){
+            try {
+                String strl = reader.readLine();
+                listener.weGetMessage(strl);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+    public Socket getSocket(){
+        return socket;
+    }
+
+    @Override
+    public void run() {
+        this.listen();
     }
 }

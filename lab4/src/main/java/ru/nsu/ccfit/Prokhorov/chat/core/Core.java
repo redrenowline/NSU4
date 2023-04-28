@@ -4,11 +4,11 @@ import ru.nsu.ccfit.Prokhorov.chat.gui.GUIHandler;
 import ru.nsu.ccfit.Prokhorov.chat.net.SocketHandler;
 import ru.nsu.ccfit.Prokhorov.chat.parsers.XmlParser;
 
-import java.awt.event.ActionEvent;
+public class Core implements UIListener, SocketListener {
 
-public class Core implements UIListener {
 
     private SocketHandler<XmlParser> socketHandler;
+    private Thread socketThread;
     private GUIHandler guiHandler;
     public Core(){
         this.identification();
@@ -20,13 +20,31 @@ public class Core implements UIListener {
 
     @Override
     public void onEnter(String hostname, int port,String path) {
-        System.out.print("The user use button");
+    //    logger.info("The user try to connect to server\n");
         try {
-            socketHandler = new SocketHandler<>(new XmlParser(), hostname, port);
+            socketHandler = new SocketHandler<>(this, new XmlParser(), hostname, port);
         }catch(RuntimeException e){
             guiHandler.showMessageAboutUnpath();
+        //    logger.severe("Error");
             return;
         }
         guiHandler.connectionIsCompleted();
+        //logger.info("The attempt to connect is okay!");
+        socketThread = (new Thread(socketHandler));
+        socketThread.start();
+    }
+
+    @Override
+    public void sendMessage(String msg) {
+        try {
+            socketHandler.sendMessage(msg);
+        }catch(Exception e){
+            //logger.severe("Something goes wrong\n");
+        }
+    }
+
+    @Override
+    public synchronized void weGetMessage(String msg) {
+        guiHandler.addNewMessage(msg);
     }
 }

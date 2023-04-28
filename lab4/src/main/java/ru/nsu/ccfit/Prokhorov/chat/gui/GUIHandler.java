@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.function.BiConsumer;
 
@@ -37,9 +39,41 @@ public class GUIHandler {
         JOptionPane.showMessageDialog(null, "This server is unreachable");
     }
 
+    public void addNewMessage(String strl){
+        mainWindow.addNewMessage(strl);
+    }
+
     public void connectionIsCompleted(){
         idetWindow.setVisible(false);
         mainWindow = new MainWindow();
+        mainWindow.getSendButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                notifyThatMessageSending();
+            }
+        });
+        mainWindow.getEnterField().addKeyListener(new KeyListener() {
+
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                System.out.print(e.getKeyCode() + "\n");
+                switch (e.getKeyCode()) {
+                    case 10:
+                        notifyThatMessageSending();
+                    break;
+                }
+            }
+        });
     }
 
     public void notifyThatUserLogin(){
@@ -56,6 +90,17 @@ public class GUIHandler {
         }
         for(final UIListener listener:listeners){
             listener.onEnter(hostname,port,path);
+        }
+    }
+    public void notifyThatMessageSending(){
+        String strl;
+        try{
+            strl = mainWindow.getText();
+        }catch(Exception e){
+            throw new RuntimeException();
+        }
+        for(final UIListener listener:listeners){
+            listener.sendMessage(strl);
         }
     }
 }

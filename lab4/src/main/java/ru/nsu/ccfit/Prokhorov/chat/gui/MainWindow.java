@@ -2,30 +2,43 @@ package ru.nsu.ccfit.Prokhorov.chat.gui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class MainWindow extends JFrame {
 
-    public JPanel panel;
-    public JTextArea area;
-    public JTextField enterField;
-    public JButton sendButton;
+    private Dimension windowDims = new Dimension(500,600);
+
+    private JPanel panel;
+    private JTextArea area;
+    private JTextField enterField;
+    private JButton sendButton;
+    private JScrollBar bar;
     public MainWindow(){
         this.setLocation(100,100);
-        this.setSize(600,600);
+        this.setSize(windowDims);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setUndecorated(true);
 
         panel = new JPanel();
-        panel.setLayout(new GridLayout(2,1,10,5));
+        panel.setLayout(null);
 
         area = new JTextArea();
         area.setEditable(false);
-        area.setMinimumSize(new Dimension(100,500));
-        area.setMaximumSize(new Dimension(100,500));
+        final JScrollPane textPanel = new JScrollPane(area);
+        textPanel.setBounds(5,5,470, 540);
 
-        panel.add(area);
+        enterField = new JTextField();
+        enterField.setBounds(5,550,455, 25 );
+
+        sendButton = new JButton("Send");
+        sendButton.setBounds(455,550,45,25);
+
+        panel.add(textPanel);
+        panel.add(enterField);
+        panel.add(sendButton);
 
         getRootPane().setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
         setThisWindowMoveable();
@@ -53,9 +66,19 @@ public class MainWindow extends JFrame {
         this.addMouseListener(m);
     }
     public String getText(){
-        return "";
+        return enterField.getText();
     }
     public void addText(String text){
         area.append(text);
+    }
+    public JButton getSendButton(){
+        return sendButton;
+    }
+
+    public void addNewMessage(String strl){
+        area.append(strl + "\n");
+    }
+    public JTextField getEnterField(){
+        return enterField;
     }
 }

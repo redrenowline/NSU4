@@ -1,26 +1,37 @@
 package ru.nsu.ccfit.Prokhorov.server.core;
 
+import ru.nsu.ccfit.Prokhorov.server.net.SocketListener;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Core {
+public class Core implements SocketToServer{
 
     ServerSocket server;
-    Socket clientSocket;
+    MessagePool pool;
 
     public Core(){
+        pool = new MessagePool();
+
+
+    }
+
+    public void start(){
         try {
             server = new ServerSocket(406);
-            clientSocket =  server.accept();
-            System.out.println("Somebody connected!");
-            BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            BufferedWriter writter = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
-            String word = reader.readLine();
-            System.out.println(word);
+            while(true) {
+                Socket clientSocket = server.accept();
+                pool.addSocket(clientSocket);
+                (new SocketListener(this,clientSocket, pool)).run();
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
 
+    @Override
+    public void disconnect(Socket socket) {
+        pool.getSockets().remove(socket);
     }
 }
