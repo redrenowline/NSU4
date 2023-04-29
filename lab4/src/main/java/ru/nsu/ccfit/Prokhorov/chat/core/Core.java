@@ -2,6 +2,7 @@ package ru.nsu.ccfit.Prokhorov.chat.core;
 
 import ru.nsu.ccfit.Prokhorov.chat.gui.GUIHandler;
 import ru.nsu.ccfit.Prokhorov.chat.net.SocketHandler;
+import ru.nsu.ccfit.Prokhorov.chat.parsers.SerializeParser;
 import ru.nsu.ccfit.Prokhorov.chat.parsers.XmlParser;
 
 public class Core implements UIListener, SocketListener {
@@ -22,7 +23,7 @@ public class Core implements UIListener, SocketListener {
     public void onEnter(String hostname, int port,String path) {
     //    logger.info("The user try to connect to server\n");
         try {
-            socketHandler = new SocketHandler<>(this, new XmlParser(), hostname, port);
+            socketHandler = new SocketHandler<>(this, new SerializeParser(), hostname, port);
         }catch(RuntimeException e){
             guiHandler.showMessageAboutUnpath();
         //    logger.severe("Error");

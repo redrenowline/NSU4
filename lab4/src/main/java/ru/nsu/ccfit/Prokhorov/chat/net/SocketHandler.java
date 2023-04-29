@@ -61,7 +61,6 @@ public class SocketHandler<T extends Parser> implements Runnable{
             throw new RuntimeException(e);
         }
     }
-
     public void listen(){
         while(socket.isConnected()){
             try {
