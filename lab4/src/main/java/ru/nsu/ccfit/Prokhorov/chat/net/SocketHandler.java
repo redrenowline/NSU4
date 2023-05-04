@@ -1,12 +1,11 @@
 package ru.nsu.ccfit.Prokhorov.chat.net;
 
 import ru.nsu.ccfit.Prokhorov.chat.core.SocketListener;
+import ru.nsu.ccfit.Prokhorov.chat.net.structures.MsgChunk;
 import ru.nsu.ccfit.Prokhorov.chat.parsers.Parser;
 
 import java.io.*;
 import java.net.Socket;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class SocketHandler<T extends Parser> implements Runnable{
 
@@ -54,7 +53,7 @@ public class SocketHandler<T extends Parser> implements Runnable{
     }
     public synchronized void sendMessage(String message){
         try {
-            writer.write(message+'\n');
+            writer.write(parser.convertChunk(new MsgChunk(new UserHandler(),message))+'\n');
             writer.flush();
         } catch (IOException e) {
             System.out.println("We got error");
@@ -65,7 +64,7 @@ public class SocketHandler<T extends Parser> implements Runnable{
         while(socket.isConnected()){
             try {
                 String strl = reader.readLine();
-                listener.weGetMessage(strl);
+                listener.weGetMessage(parser.deconvertChunk(strl).getMsg());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

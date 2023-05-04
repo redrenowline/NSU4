@@ -9,12 +9,12 @@ import java.awt.event.MouseEvent;
 
 public class MainWindow extends JFrame {
 
-    private Dimension windowDims = new Dimension(500,600);
+    private final Dimension windowDims = new Dimension(500,600);
 
-    private JPanel panel;
-    private JTextArea area;
-    private JTextField enterField;
-    private JButton sendButton;
+    private final JPanel panel;
+    private final JTextArea area;
+    private final JTextField enterField;
+    private final JButton sendButton;
     private JScrollBar bar;
     public MainWindow(){
         this.setLocation(100,100);
@@ -33,8 +33,8 @@ public class MainWindow extends JFrame {
         enterField = new JTextField();
         enterField.setBounds(5,550,455, 25 );
 
-        sendButton = new JButton("Send");
-        sendButton.setBounds(455,550,45,25);
+        sendButton = new JButton();
+        sendButton.setBounds(455,550,35,25);
 
         panel.add(textPanel);
         panel.add(enterField);
@@ -65,11 +65,11 @@ public class MainWindow extends JFrame {
         this.addMouseMotionListener(m);
         this.addMouseListener(m);
     }
+    public JTextField getTextField(){
+        return enterField;
+    }
     public String getText(){
         return enterField.getText();
-    }
-    public void addText(String text){
-        area.append(text);
     }
     public JButton getSendButton(){
         return sendButton;

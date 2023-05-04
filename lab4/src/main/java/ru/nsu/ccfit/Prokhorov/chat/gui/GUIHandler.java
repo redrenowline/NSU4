@@ -46,12 +46,7 @@ public class GUIHandler {
     public void connectionIsCompleted(){
         idetWindow.setVisible(false);
         mainWindow = new MainWindow();
-        mainWindow.getSendButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                notifyThatMessageSending();
-            }
-        });
+        mainWindow.getSendButton().addActionListener(e -> notifyThatMessageSending());
         mainWindow.getEnterField().addKeyListener(new KeyListener() {
 
             @Override
@@ -96,6 +91,7 @@ public class GUIHandler {
         String strl;
         try{
             strl = mainWindow.getText();
+            mainWindow.getEnterField().setText("");
         }catch(Exception e){
             throw new RuntimeException();
         }

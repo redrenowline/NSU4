@@ -1,6 +1,6 @@
 package ru.nsu.ccfit.Prokhorov.chat.parsers;
 
-import ru.nsu.ccfit.Prokhorov.chat.net.MsgChunk;
+import ru.nsu.ccfit.Prokhorov.chat.net.structures.MsgChunk;
 
 public abstract class Parser {
 
