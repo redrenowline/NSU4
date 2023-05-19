@@ -1,9 +1,11 @@
 package ru.nsu.ccfit.Prokhorov.chat.core;
 
 import ru.nsu.ccfit.Prokhorov.chat.gui.GUIHandler;
+import ru.nsu.ccfit.Prokhorov.chat.local.UIResources;
 import ru.nsu.ccfit.Prokhorov.chat.net.SocketHandler;
-import ru.nsu.ccfit.Prokhorov.chat.parsers.SerializeParser;
-import ru.nsu.ccfit.Prokhorov.chat.parsers.XmlParser;
+import ru.nsu.ccfit.Prokhorov.shared.Chunk;
+import ru.nsu.ccfit.Prokhorov.shared.SerializeParser;
+import ru.nsu.ccfit.Prokhorov.shared.XmlParser;
 
 public class Core implements UIListener, SocketListener {
 
@@ -45,7 +47,7 @@ public class Core implements UIListener, SocketListener {
     }
 
     @Override
-    public synchronized void weGetMessage(String msg) {
-        guiHandler.addNewMessage(msg);
+    public synchronized void weGetMessage(Chunk msg) {
+        guiHandler.addNewMessage(String.format(UIResources.msg_format,msg.getUserInfo().getNickname(),msg.getMsg()));
     }
 }

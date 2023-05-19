@@ -1,13 +1,14 @@
 package ru.nsu.ccfit.Prokhorov.server.net;
 
 import ru.nsu.ccfit.Prokhorov.server.core.MessagePool;
-import ru.nsu.ccfit.Prokhorov.server.core.SocketToServer;
+import ru.nsu.ccfit.Prokhorov.server.net.SocketToServer;
 
 import java.io.*;
 import java.net.Socket;
 import java.util.logging.SocketHandler;
 
 public class SocketListener extends Thread{
+
 
     private SocketToServer conn;
     private Socket socket;
@@ -33,7 +34,7 @@ public class SocketListener extends Thread{
                 conn.disconnect(socket);
                 return;
             }
-            pool.add(strl);
+            //pool.add(strl);
         }
     }
 }

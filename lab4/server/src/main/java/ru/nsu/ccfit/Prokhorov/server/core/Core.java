@@ -1,37 +1,30 @@
 package ru.nsu.ccfit.Prokhorov.server.core;
 
-import ru.nsu.ccfit.Prokhorov.server.net.SocketListener;
+import ru.nsu.ccfit.Prokhorov.server.gui.GUIHandler;
+import ru.nsu.ccfit.Prokhorov.server.net.ServerHandler;
 
 import java.io.*;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.net.InetSocketAddress;
+import java.nio.channels.ServerSocketChannel;
+import java.nio.channels.SocketChannel;
 
-public class Core implements SocketToServer{
+public class Core implements GUIListener {
 
-    ServerSocket server;
-    MessagePool pool;
+    private MessagePool pool;
+    private ServerHandler serverHandler;
+
+    private GUIHandler gui;
 
     public Core(){
-        pool = new MessagePool();
-
-
+        gui = new GUIHandler(this);
+        gui.showInitWindow();
     }
 
-    public void start(){
-        try {
-            server = new ServerSocket(406);
-            while(true) {
-                Socket clientSocket = server.accept();
-                pool.addSocket(clientSocket);
-                (new SocketListener(this,clientSocket, pool)).run();
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+
 
     @Override
-    public void disconnect(Socket socket) {
-        pool.getSockets().remove(socket);
+    public void startServerWork(int port, int THREAD_COUNT) {
+        serverHandler = new ServerHandler(pool, port, THREAD_COUNT);
+        serverHandler.start();
     }
 }
