@@ -1,5 +1,7 @@
 package ru.nsu.ccfit.Prokhorov.chat.gui;
 
+import ru.nsu.ccfit.Prokhorov.chat.UIResourcesConstants;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -7,67 +9,54 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.security.Key;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class IdentificationWindow extends JFrame {
 
-    private JPanel panel;
-    private JLabel lblHostname;
-    private JTextField hostnameField;
-    private JLabel lblPort;
-    private JTextField portField;
-    private JTextField filePath;
-    private JButton btnFilePath;
-    private JButton btnLogin;
-    public IdentificationWindow(){
-        this.setLocation(100,100);
-        this.setSize(200,200);
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setUndecorated(true);
+    private final JPanel panel;
+    private final JLabel lblHostname;
+    private final JTextField hostnameField;
+    private final JLabel lblPort;
+    private final JTextField portField;
+    private final JLabel nicknameLabel;
+    private final JTextField nicknameField;
+    private final JButton btnLogin;
 
-        lblHostname = new JLabel("Enter ip address");
+    private Locale locale;
+    private ResourceBundle resourceBundle;
+
+
+    private final Rectangle frameSize = new Rectangle(100,100,200,250);
+    public IdentificationWindow(Locale locale){
+        this.locale = locale;
+        resourceBundle = ResourceBundle.getBundle(UIResourcesConstants.BUNDLE_NAME, locale);
+        this.setBounds(frameSize);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        lblHostname = new JLabel(resourceBundle.getString(UIResourcesConstants.IP_LABEL));
         lblHostname.setHorizontalTextPosition(SwingConstants.CENTER);
         hostnameField = new JTextField();
-        lblPort = new JLabel("Enter port");
+        lblPort = new JLabel(resourceBundle.getString(UIResourcesConstants.PORT_NAME));
         lblPort.setHorizontalTextPosition(SwingConstants.CENTER);
         portField = new JTextField();
-        filePath = new JTextField();
-        btnFilePath = new JButton( "Upload user file");
-        btnLogin = new JButton( "Login");
+        btnLogin = new JButton( resourceBundle.getString(UIResourcesConstants.LOGIN_BTN));
+        nicknameLabel = new JLabel(resourceBundle.getString(UIResourcesConstants.NICKNAME_LABEL));
+        nicknameField = new JTextField();
 
         panel = new JPanel();
-        panel.setLayout(new GridLayout(5,1,10,5));
+        panel.setLayout(new GridLayout(7,1,10,5));
         panel.add(lblHostname);
         panel.add(hostnameField);
         panel.add(lblPort);
         panel.add(portField);
-//        panel.add(filePath);
-//        panel.add(btnFilePath);
+        panel.add(nicknameLabel);
+        panel.add(nicknameField);
         panel.add(btnLogin);
 
         getRootPane().setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
-        setThisWindowMoveable();
         this.setContentPane(panel);
         this.setVisible(true);
-    }
-
-    public void setThisWindowMoveable(){
-        MouseAdapter m = new MouseAdapter() {
-            int y;
-            int x;
-
-            public void mousePressed(MouseEvent e) {
-                // запоминаем координаты клика
-                x = e.getX();
-                y = e.getY();
-            }
-
-            public void mouseDragged(MouseEvent e) {
-                // двигаем окно
-                setLocation(e.getXOnScreen() - x, e.getYOnScreen() - y);
-            }
-        };
-        this.addMouseMotionListener(m);
-        this.addMouseListener(m);
     }
 
     public JButton getBtnLogin(){
@@ -76,13 +65,14 @@ public class IdentificationWindow extends JFrame {
     public String getHostname(){
         return hostnameField.getText();
     }
+    public String getNickname(){
+        return nicknameField.getText();
+    }
     public int getPort(){
         return Integer.parseInt(portField.getText());
     }
 
-    public String getFilePath(){
-        return "";
-    }
+
 }
 
 

@@ -21,17 +21,19 @@ public class SocketHandler<T extends Parser> implements Runnable{
     private Parser parser;
 
     private SocketChannel socket;
-    //private UserHandler user;
+    private UserHandler user;
 
     public static Charset charset = Charset.forName("UTF-8");
     public static CharsetEncoder encoder = charset.newEncoder();
     public static CharsetDecoder decoder = charset.newDecoder();
 
-    public SocketHandler(SocketListener listener, Parser parser, String hostname, int port){
+    public SocketHandler(SocketListener listener, Parser parser, String hostname, int port, String nickname){
         this.parser = parser;
         this.listener = listener;
+        user = new UserHandler(nickname);
         try {
             socket = SocketChannel.open(new InetSocketAddress(hostname, port));
+            sendMessage(user.getNickname(), Chunk.TAG.LOGIN);
         } catch (IOException e) {
             throw new RuntimeException(e); // change it later
         }
@@ -46,12 +48,16 @@ public class SocketHandler<T extends Parser> implements Runnable{
             throw new RuntimeException(e); // change it later
         }
     }
-    public synchronized void sendMessage(String message){
+    public synchronized void sendMessage(String message, Chunk.TAG tag){
         try {
-            byte[] mass = parser.convertChunk(new Chunk(new UserHandler(), message));
+            byte[] mass = parser.convertChunk(new Chunk(user, message, tag));
+            ByteBuffer bufferSize = ByteBuffer.allocate(4);
+            int size = mass.length;
+            bufferSize.putInt(mass.length);
+            bufferSize.flip();
+            socket.write(bufferSize);
             ByteBuffer buffer = ByteBuffer.wrap(mass);
             socket.write(buffer);
-            socket.shutdownOutput();
         } catch (IOException e) {
             System.out.println("We got error");
             throw new RuntimeException(e);

@@ -21,7 +21,7 @@ public class MessagePool {
         ls.add(msg);
     }
 
-    public List<Chunk> getMessages(){
+    public synchronized List<Chunk> getMessages(){
         return ls;
     }
 }

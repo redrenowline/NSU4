@@ -16,11 +16,10 @@ public class Core implements GUIListener {
     private GUIHandler gui;
 
     public Core(){
-        gui = new GUIHandler(this);
+        pool = new MessagePool();
+        gui = new GUIHandler(this, pool);
         gui.showInitWindow();
     }
-
-
 
     @Override
     public void startServerWork(int port, int THREAD_COUNT) {

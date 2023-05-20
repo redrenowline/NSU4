@@ -1,5 +1,6 @@
 package ru.nsu.ccfit.Prokhorov.chat.gui;
 
+import ru.nsu.ccfit.Prokhorov.chat.UIResourcesConstants;
 import ru.nsu.ccfit.Prokhorov.chat.core.UIListener;
 
 import javax.swing.*;
@@ -9,6 +10,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.function.BiConsumer;
 
 public class GUIHandler {
@@ -16,10 +19,15 @@ public class GUIHandler {
     private ArrayList<UIListener> listeners;
     private IdentificationWindow idetWindow;
     private MainWindow mainWindow;
-    public GUIHandler(){
-        listeners = new ArrayList<>();
 
-        idetWindow = new IdentificationWindow();
+    private Locale locale;
+    private ResourceBundle resourceBundle;
+    public GUIHandler(Locale locale){
+        this.locale = locale;
+        listeners = new ArrayList<>();
+        resourceBundle = ResourceBundle.getBundle(UIResourcesConstants.BUNDLE_NAME, locale);
+
+        idetWindow = new IdentificationWindow(locale);
         idetWindow.getBtnLogin().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -33,10 +41,10 @@ public class GUIHandler {
     }
 
     public void showMessageAboutWrongData(){
-        JOptionPane.showMessageDialog(null, "Your data is wrong");
+        JOptionPane.showMessageDialog(null,  resourceBundle.getString(UIResourcesConstants.DATA_WR));
     }
     public void showMessageAboutUnpath(){
-        JOptionPane.showMessageDialog(null, "This server is unreachable");
+        JOptionPane.showMessageDialog(null, resourceBundle.getString(UIResourcesConstants.UNRE_PTH));
     }
 
     public void addNewMessage(String strl){
@@ -74,23 +82,24 @@ public class GUIHandler {
     public void notifyThatUserLogin(){
         String hostname;
         int port;
-        String path;
+        String path, nickname;
         try {
             hostname = idetWindow.getHostname();
             port = idetWindow.getPort();
-            path = idetWindow.getFilePath();
+            nickname = idetWindow.getNickname();
         }catch(RuntimeException e){
             showMessageAboutWrongData();
             return;
         }
         for(final UIListener listener:listeners){
-            listener.onEnter(hostname,port,path);
+            listener.onEnter(hostname,port,nickname);
         }
     }
     public void notifyThatMessageSending(){
         String strl;
         try{
             strl = mainWindow.getText();
+            if(strl == "") return;
             mainWindow.getEnterField().setText("");
         }catch(Exception e){
             throw new RuntimeException();
