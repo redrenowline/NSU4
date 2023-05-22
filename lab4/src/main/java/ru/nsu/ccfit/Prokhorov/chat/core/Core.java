@@ -60,5 +60,7 @@ public class Core implements UIListener, SocketListener {
             guiHandler.addNewMessage(String.format(UIResources.msg_format,msg.getUserInfo().getNickname(),msg.getMsg()));
         else if(msg.getTag() == Chunk.TAG.LOGIN)
             guiHandler.addNewMessage(String.format(resourceBundle.getString(UIResourcesConstants.NEW_LOGIN), msg.getMsg()));
+        else if(msg.getTag() == Chunk.TAG.LOGOUT)
+            guiHandler.addNewMessage(String.format(resourceBundle.getString(UIResourcesConstants.OLD_LOGOUT), msg.getMsg()));
     }
 }

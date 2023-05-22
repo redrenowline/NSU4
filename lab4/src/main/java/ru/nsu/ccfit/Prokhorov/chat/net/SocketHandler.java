@@ -8,12 +8,7 @@ import ru.nsu.ccfit.Prokhorov.shared.UserHandler;
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
-import java.nio.CharBuffer;
 import java.nio.channels.SocketChannel;
-import java.nio.charset.Charset;
-import java.nio.charset.CharsetDecoder;
-import java.nio.charset.CharsetEncoder;
-import java.util.Base64;
 
 public class SocketHandler<T extends Parser> implements Runnable{
 
@@ -23,9 +18,6 @@ public class SocketHandler<T extends Parser> implements Runnable{
     private SocketChannel socket;
     private UserHandler user;
 
-    public static Charset charset = Charset.forName("UTF-8");
-    public static CharsetEncoder encoder = charset.newEncoder();
-    public static CharsetDecoder decoder = charset.newDecoder();
 
     public SocketHandler(SocketListener listener, Parser parser, String hostname, int port, String nickname){
         this.parser = parser;
@@ -33,33 +25,22 @@ public class SocketHandler<T extends Parser> implements Runnable{
         user = new UserHandler(nickname);
         try {
             socket = SocketChannel.open(new InetSocketAddress(hostname, port));
-            sendMessage(user.getNickname(), Chunk.TAG.LOGIN);
         } catch (IOException e) {
-            throw new RuntimeException(e); // change it later
+            throw new RuntimeException(e);
         }
 
     }
 
-
-    public void reconnect(String hostname, int port){
-        try {
-            socket = SocketChannel.open(new InetSocketAddress(hostname, port));
-        } catch (IOException e) {
-            throw new RuntimeException(e); // change it later
-        }
-    }
     public synchronized void sendMessage(String message, Chunk.TAG tag){
         try {
             byte[] mass = parser.convertChunk(new Chunk(user, message, tag));
             ByteBuffer bufferSize = ByteBuffer.allocate(4);
-            int size = mass.length;
             bufferSize.putInt(mass.length);
             bufferSize.flip();
             socket.write(bufferSize);
             ByteBuffer buffer = ByteBuffer.wrap(mass);
             socket.write(buffer);
         } catch (IOException e) {
-            System.out.println("We got error");
             throw new RuntimeException(e);
         }
     }
@@ -67,7 +48,12 @@ public class SocketHandler<T extends Parser> implements Runnable{
     public void listen(){
         while(socket.isConnected()){
             try {
-                ByteBuffer buffer = ByteBuffer.allocate(2048);
+                int length;
+                ByteBuffer bufferSize = ByteBuffer.allocate(4);
+                socket.read(bufferSize);
+                bufferSize.flip();
+                length = bufferSize.getInt();
+                ByteBuffer buffer = ByteBuffer.allocate(length);
                 socket.read(buffer);
                 byte[] mass = buffer.array();
                 listener.weGetMessage(parser.deconvertChunk(mass));
