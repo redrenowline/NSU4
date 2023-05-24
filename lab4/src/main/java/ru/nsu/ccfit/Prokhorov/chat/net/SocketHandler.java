@@ -22,7 +22,7 @@ public class SocketHandler<T extends Parser> implements Runnable{
     public SocketHandler(SocketListener listener, Parser parser, String hostname, int port, String nickname){
         this.parser = parser;
         this.listener = listener;
-        user = new UserHandler(nickname);
+        user = new UserHandler(nickname, null);
         try {
             socket = SocketChannel.open(new InetSocketAddress(hostname, port));
         } catch (IOException e) {
