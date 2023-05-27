@@ -74,15 +74,12 @@ public class GUIHandler {
         gameGUI.getField().addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println(String.format("%d : %d", e.getX(), e.getY()));
                 int x0 = e.getX() / gameGUI.getField().getCompHeight();
                 int y0 = e.getY() / gameGUI.getField().getCompWidth();
                 if(e.getButton() == MouseEvent.BUTTON1){
-                    System.out.println("RightClick");
                     listener.checkPoint(x0, y0);
                 }
                 if(e.getButton() == MouseEvent.BUTTON3){
-                    System.out.println("LeftClick");
                     listener.setFlag(x0, y0);
                 }
             }
