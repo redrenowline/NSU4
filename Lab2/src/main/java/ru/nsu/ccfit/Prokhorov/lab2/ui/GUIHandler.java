@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class GUIHandler {
@@ -16,13 +17,17 @@ public class GUIHandler {
     private MenuGUI menuGUI;
     private SettingsGUI settingsGUI;
     private GameGUI gameGUI;
+    private StatisticsGUI statisticsGUI;
     private GUIHandlerListener listener;
+    private Locale locale;
     private ResourceBundle resourceBundle;
 
     public GUIHandler(GUIHandlerListener listener){
-        menuGUI = new MenuGUI(new Locale("en"));
-        settingsGUI = new SettingsGUI(new Locale("en"));
-        resourceBundle = ResourceBundle.getBundle(UIResourcesNames.BUNDLE_NAME, new Locale("en"));
+        locale = new Locale("ru");
+        menuGUI = new MenuGUI(locale);
+        settingsGUI = new SettingsGUI(locale);
+        statisticsGUI = new StatisticsGUI(locale);
+        resourceBundle = ResourceBundle.getBundle(UIResourcesNames.BUNDLE_NAME, locale);
         this.listener = listener;
     }
 
@@ -33,7 +38,9 @@ public class GUIHandler {
         menuGUI.getStatisticsButton().addActionListener(e -> listener.statisticsButtonPressed());
     }
 
-
+    public void showStatistics(Map<String, Long> list){
+        statisticsGUI.st(list);
+    }
 
     public void showSettings(){
         settingsGUI.st();
@@ -44,7 +51,8 @@ public class GUIHandler {
                     int height = settingsGUI.getFieldsHeight();
                     int width = settingsGUI.getFieldWidth();
                     int mineCount = settingsGUI.getMineCount();
-                    listener.startGame(height, width, mineCount);
+                    String nickname = settingsGUI.getNickname();
+                    listener.startGame(height, width, mineCount, nickname);
                 }catch(WrongEnterDataException exception){
                     JOptionPane.showMessageDialog(null, resourceBundle.getString(UIResourcesNames.OPTIONS_WRONG_DATA));
                 }
@@ -55,12 +63,15 @@ public class GUIHandler {
     public void hideMenu(){
         menuGUI.hd();
     }
+    public void hideGame(){
+        gameGUI.fn();
+    }
 
     public void updateField(byte[][] matrix, int flagsCount){
         gameGUI.updateField(matrix, flagsCount);
     }
     public void showWinningMessage(long time){
-        JOptionPane.showMessageDialog(null, resourceBundle.getString(UIResourcesNames.GAME_WINNING_MESSAGE) + String.valueOf(time / 1000));
+        JOptionPane.showMessageDialog(null, String.format(resourceBundle.getString(UIResourcesNames.GAME_WINNING_MESSAGE),String.valueOf(time / 60000), String.valueOf((time / 1000)%60)));
     }
 
     public void showLosingMessage(){
@@ -68,7 +79,7 @@ public class GUIHandler {
     }
 
     public void showGameGUI(byte[][] matrix, int mineCount){
-        gameGUI = new GameGUI(new Locale("en"), matrix, mineCount);
+        gameGUI = new GameGUI(locale, matrix, mineCount);
         settingsGUI.fn();
         gameGUI.st();
         gameGUI.getField().addMouseListener(new MouseListener() {

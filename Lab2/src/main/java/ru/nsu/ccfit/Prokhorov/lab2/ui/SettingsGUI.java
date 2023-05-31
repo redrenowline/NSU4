@@ -16,15 +16,19 @@ public class SettingsGUI extends JFrame {
     private JTextField heightField, widthField;
     private JLabel mineCountLabel;
     private JTextField mineCountField;
+    private JLabel nicknameLabel;
+    private JTextField nicknameField;
     private JButton startGameButton;
     private final JPanel panel;
-    private final Rectangle frameSize = new Rectangle(100,100,210,150);
+    private final Rectangle frameSize = new Rectangle(100,100,210,190);
     private final Rectangle fieldSizeLabelSize = new Rectangle(5,5,205,20);
     private final Rectangle heightFieldSize = new Rectangle(5,25, 100,20);
     private final Rectangle widthFieldSize = new Rectangle(105,25,100,20);
     private final Rectangle mineCountLabelSize = new Rectangle(5,45, 200,20);
     private final Rectangle mineCountFieldSize = new Rectangle(5,65,200,20);
-    private Rectangle startGameButtonSize = new Rectangle(5,85,200,20);
+    private final Rectangle nicknameLabelSize = new Rectangle(5,85,200,20);
+    private final Rectangle nicknameFieldSize = new Rectangle(5,105,200,20);
+    private Rectangle startGameButtonSize = new Rectangle(5,125,200,20);
 
     public SettingsGUI(Locale locale){
         this.locale = locale;
@@ -43,6 +47,8 @@ public class SettingsGUI extends JFrame {
         identMineCountLabel();
         identMineCountField();
         identStartGameButton();
+        identNicknameLabel();
+        identNicknameField();
     }
 
     public void st(){
@@ -94,6 +100,18 @@ public class SettingsGUI extends JFrame {
         panel.add(startGameButton);
     }
 
+    public void identNicknameLabel(){
+        nicknameLabel = new JLabel();
+        nicknameLabel.setBounds(nicknameLabelSize);
+        nicknameLabel.setText(resourceBundle.getString(UIResourcesNames.SETTINGS_NICKNAME_LABEL));
+        panel.add(nicknameLabel);
+    }
+    public void identNicknameField(){
+        nicknameField = new JTextField();
+        nicknameField.setBounds(nicknameFieldSize);
+        panel.add(nicknameField);
+    }
+
     public JButton getStartGameButton(){
         return startGameButton;
     }
@@ -124,5 +142,13 @@ public class SettingsGUI extends JFrame {
         }catch(Exception e){
             throw new WrongEnterDataException();
         }
+    }
+    public String getNickname(){
+        if(nicknameField.getText().equals("")){
+            throw new WrongEnterDataException(
+
+            );
+        }
+        return nicknameField.getText();
     }
 }

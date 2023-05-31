@@ -14,5 +14,8 @@ public class UIResourcesNames {
     public static final String GAME_FLAGS_COUNT_LABEL_PREFIX = "GAME_FLAGS_COUNT_LABEL_PREFIX";
     public static final String GAME_MINE_COUNT_PREFIX = "GAME_MINE_COUNT_PREFIX";
     public static final String GAME_WINNING_MESSAGE = "GAME_WINNING_MESSAGE";
+    public static final String STATISTICS_LABEL = "STATISTICS_LABEL";
     public static final String GAME_LOSING_MESSAGE = "GAME_LOSING_MESSAGE";
+    public static final String SETTINGS_NICKNAME_FIELD = "SETTINGS_NICKNAME_FIELD";
+    public static final String SETTINGS_NICKNAME_LABEL = "SETTINGS_NICKNAME_LABEL";
 }

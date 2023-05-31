@@ -20,21 +20,21 @@ public class FieldWidget extends JPanel {
     private TexturePaint spaceTexturePaint;
     private TexturePaint flagTexturePoint;
     private TexturePaint[] numbersTexturePaint;
-    public final String fogTexturePath = "build/resources/main/textures/fog.png";
-    public final String spaceTexturePath="build/resources/main/textures/space.png";
-    public final String flagTexturePath = "build/resources/main/textures/flag.png";
-    public final String oneTexturePath = "build/resources/main/textures/one.png";
-    public final String twoTexturePath = "build/resources/main/textures/two.png";
-    public final String threeTexturePath = "build/resources/main/textures/three.png";
+    public final String fogTexturePath = "resources/main/textures/fog.png";
+    public final String spaceTexturePath="resources/main/textures/space.png";
+    public final String flagTexturePath = "resources/main/textures/flag.png";
+    public final String oneTexturePath = "resources/main/textures/one.png";
+    public final String twoTexturePath = "resources/main/textures/two.png";
+    public final String threeTexturePath = "resources/main/textures/three.png";
 
-    public final String fourTexturePath = "build/resources/main/textures/four.png";
+    public final String fourTexturePath = "resources/main/textures/four.png";
 
-    public final String fiveTexturePath = "build/resources/main/textures/five.png";
+    public final String fiveTexturePath = "resources/main/textures/five.png";
 
-    public final String sixTexturePath = "build/resources/main/textures/six.png";
-    public final String sevenTexturePath = "build/resources/main/textures/six.png";
-    public final String eightTexturePath = "build/resources/main/textures/six.png";
-    public final String nineTexturePath = "build/resources/main/textures/six.png";
+    public final String sixTexturePath = "resources/main/textures/six.png";
+    public final String sevenTexturePath = "resources/main/textures/six.png";
+    public final String eightTexturePath = "resources/main/textures/six.png";
+    public final String nineTexturePath = "resources/main/textures/six.png";
 
     public FieldWidget(byte[][] matrix){
         super();
