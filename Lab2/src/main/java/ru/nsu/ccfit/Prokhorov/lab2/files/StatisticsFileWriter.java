@@ -23,5 +23,6 @@ public class StatisticsFileWriter {
         for(Map.Entry<String, Long> iter: list.entrySet()){
             writter.write(String.format(mask, iter.getKey(),iter.getValue()));
         }
+        writter.close();
     }
 }

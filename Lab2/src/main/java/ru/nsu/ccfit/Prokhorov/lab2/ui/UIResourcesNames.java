@@ -18,4 +18,6 @@ public class UIResourcesNames {
     public static final String GAME_LOSING_MESSAGE = "GAME_LOSING_MESSAGE";
     public static final String SETTINGS_NICKNAME_FIELD = "SETTINGS_NICKNAME_FIELD";
     public static final String SETTINGS_NICKNAME_LABEL = "SETTINGS_NICKNAME_LABEL";
+    public static final String STATISTICS_ROW = "STATISTICS_ROW";
+    public static final String STATISTICS_HTML = "STATISTICS_HTML";
 }

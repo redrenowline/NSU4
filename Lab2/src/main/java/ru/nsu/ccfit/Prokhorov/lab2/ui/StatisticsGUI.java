@@ -38,14 +38,11 @@ public class StatisticsGUI extends JFrame {
     }
 
     private void updateData(){
-        String strl = "<html>";
+        String strl = "";
         for(Map.Entry<String, Long> itr : list.entrySet()){
-            strl += itr.getKey();
-            strl += " ";
-            strl += String.valueOf(itr.getValue());
-            strl += "<br>";
+            strl += String.format(resourceBundle.getString(UIResourcesNames.STATISTICS_ROW), itr.getKey() ,String.valueOf(itr.getValue() / 60000), String.valueOf((itr.getValue() / 1000) % 60));
         }
-        strl+="</html>";
+        strl = String.format(resourceBundle.getString(UIResourcesNames.STATISTICS_HTML), strl);
         dataLabel.setText(strl);
     }
 
