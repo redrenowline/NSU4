@@ -8,16 +8,13 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ResourceBundle;
 
 public class FieldWidget extends JPanel {
 
-    private int compHeight = 10;
-    private int  compWidth = 10;
+    private final int compHeight = 10;
+    private final int  compWidth = 10;
     private byte[][] matrix;
-    private TexturePaint mineTexturePaint;
     private TexturePaint fogTexturePaint;
-    private TexturePaint spaceTexturePaint;
     private TexturePaint flagTexturePoint;
     private TexturePaint[] numbersTexturePaint;
     public final String fogTexturePath = "resources/main/textures/fog.png";
@@ -90,9 +87,6 @@ public class FieldWidget extends JPanel {
                 switch(matrix[i][j]){
                     case CellConstants.FOG_CELL:
                         tmpTexturePaint = fogTexturePaint;
-                        break;
-                    case CellConstants.MINE_CELL:
-                        tmpTexturePaint = mineTexturePaint;
                         break;
                     case CellConstants.FLAG_CELL:
                         tmpTexturePaint = flagTexturePoint;

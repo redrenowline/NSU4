@@ -69,6 +69,7 @@ public class GUIHandler {
 
     public void updateField(byte[][] matrix, int flagsCount){
         gameGUI.updateField(matrix, flagsCount);
+        gameGUI.enableField();
     }
     public void showWinningMessage(long time){
         JOptionPane.showMessageDialog(null, String.format(resourceBundle.getString(UIResourcesNames.GAME_WINNING_MESSAGE),String.valueOf(time / 60000), String.valueOf((time / 1000)%60)));
@@ -87,6 +88,7 @@ public class GUIHandler {
             public void mouseClicked(MouseEvent e) {
                 int x0 = e.getX() / gameGUI.getField().getCompHeight();
                 int y0 = e.getY() / gameGUI.getField().getCompWidth();
+                gameGUI.disableField();
                 if(e.getButton() == MouseEvent.BUTTON1){
                     listener.checkPoint(x0, y0);
                 }

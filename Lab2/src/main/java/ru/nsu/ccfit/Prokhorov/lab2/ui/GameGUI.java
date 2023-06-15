@@ -72,5 +72,13 @@ public class GameGUI extends JFrame {
         flagsCountLabel.setText(resourceBundle.getString(UIResourcesNames.GAME_FLAGS_COUNT_LABEL_PREFIX) + String.valueOf(flagsCount));
     }
 
+    public void enableField(){
+        fieldWidget.setEnabled(true);
+    }
+
+    public void disableField(){
+        fieldWidget.setEnabled(false);
+    }
+
 
 }

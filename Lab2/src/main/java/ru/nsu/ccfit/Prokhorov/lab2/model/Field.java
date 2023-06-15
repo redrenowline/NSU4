@@ -24,12 +24,45 @@ public class Field {
 
     }
 
+    public void alternativeGenerateFiled(int x, int y){
+        Random rand = new Random();
+        rand.setSeed(42342 * x + 43 * y);
+        Pair[] pairs = new Pair[this.field.length * this.field[0].length - 1];
+        int setsLength = this.field.length * this.field[0].length - 1;
+        int al = 0;
+        for(int i = 0; i < field.length; i++){
+            for(int j = 0; j < field[0].length; j++){
+                if(i != x || j != y){
+                    pairs[al] = new Pair(i, j);
+                    al++;
+                }
+            }
+        }
+        for(int i = 0; i < field.length + field[0].length; i++){
+            int itr1 = Math.abs(rand.nextInt()) % setsLength;
+            int itr2 = Math.abs(rand.nextInt()) % setsLength;
+            Pair tmp = new Pair(pairs[itr1].getFirst(), pairs[itr1].getSecond());
+            pairs[itr1].setValues(pairs[itr2].getFirst(), pairs[itr2].getSecond());
+            pairs[itr2].setValues(tmp.getFirst(), tmp.getSecond());
+        }
+        for(int itr = 0; itr < mineCount; itr++){
+            Pair pair = pairs[itr];
+            field[pair.getFirst()][pair.getSecond()] = CellConstants.MINE_CELL;
+        }
+        for(int i = 0; i < field.length; i++){
+            for(int j = 0;j < field[field.length - 1].length; j++){
+                if(field[i][j] != CellConstants.MINE_CELL) field[i][j] = calcBombs(i,j);
+            }
+        }
+        generated = true;
+    }
+
     public void generateField(int x, int y){
         Random rand = new Random();
         rand.setSeed(x * 31213 + y *121);
         for(int itr = 0; itr < mineCount; itr++){
             int x0 = (int) (Math.abs(rand.nextInt()) % field.length);
-            int y0 = (int) (Math.abs(rand.nextInt()) % field[field.length - 1].length);
+            int y0 = (int) (Math.abs(rand.nextInt()) % field[0].length);
             if(x != x0 && y!= y0 && field[x0][y0] != CellConstants.MINE_CELL){
                 field[x0][y0] = CellConstants.MINE_CELL;
             }else{
@@ -121,10 +154,10 @@ public class Field {
     public boolean checkWinned(){
         for(int i = 0; i < field.length; i++){
             for(int j = 0; j < field[i].length; j++){
-                if(mask[i][j] == CellConstants.FOG_CELL){
+                if(mask[i][j] == CellConstants.FOG_CELL && field[i][j] != CellConstants.MINE_CELL){
                     return false;
                 }
-                if(mask[i][j]== CellConstants.FLAG_CELL && field[i][j] != CellConstants.MINE_CELL){
+                if(mask[i][j]== CellConstants.FLAG_CELL&& field[i][j] != CellConstants.MINE_CELL){
                     return false;
                 }
             }

@@ -30,7 +30,6 @@ public class Core implements GUIHandlerListener {
 
         logBundle = ResourceBundle.getBundle(LoggerResourcesNames.BUNDLE_NAME);
         timer = new Timer();
-        startDate = new Date();
         try{
             StatisticsFileReader reader = new StatisticsFileReader();
             statistics = reader.getList();
@@ -74,6 +73,7 @@ public class Core implements GUIHandlerListener {
         field = new Field(height, width, mineCount);
         this.nickname = nickname;
         guiHandler.showGameGUI(field.getMask(), mineCount);
+        startDate = new Date();
     }
 
     @Override
@@ -82,7 +82,7 @@ public class Core implements GUIHandlerListener {
             return;
         }
         if(!field.getGenerated())
-            field.generateField(x0, y0);
+            field.alternativeGenerateFiled(x0, y0);
         field.checkCell(x0, y0);
         guiHandler.updateField(field.getMask(), field.getFlagsCount());
         if(field.checkWinned()){
