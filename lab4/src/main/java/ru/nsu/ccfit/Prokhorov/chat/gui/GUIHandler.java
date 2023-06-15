@@ -53,7 +53,7 @@ public class GUIHandler {
 
     public void connectionIsCompleted(){
         idetWindow.setVisible(false);
-        mainWindow = new MainWindow();
+        mainWindow = new MainWindow(locale, idetWindow.getNickname());
         mainWindow.getSendButton().addActionListener(e -> notifyThatMessageSending());
         mainWindow.getEnterField().addKeyListener(new KeyListener() {
 

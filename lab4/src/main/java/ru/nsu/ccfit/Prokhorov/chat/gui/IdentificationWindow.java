@@ -66,6 +66,9 @@ public class IdentificationWindow extends JFrame {
         return hostnameField.getText();
     }
     public String getNickname(){
+        if(nicknameField.getText().equals("")){
+            throw new WrongArgumentsException();
+        }
         return nicknameField.getText();
     }
     public int getPort(){

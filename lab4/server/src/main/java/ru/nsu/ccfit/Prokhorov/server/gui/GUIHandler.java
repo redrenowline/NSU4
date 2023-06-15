@@ -2,6 +2,7 @@ package ru.nsu.ccfit.Prokhorov.server.gui;
 
 import ru.nsu.ccfit.Prokhorov.server.core.GUIListener;
 import ru.nsu.ccfit.Prokhorov.server.core.MessagePool;
+import ru.nsu.ccfit.Prokhorov.server.net.ThreadInfo;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,13 +29,15 @@ public class GUIHandler {
                 initializationGUI.setEnabled(false);
                 initializationGUI.dispose();
                 showRuningGUI();
-                listener.startServerWork(initializationGUI.getPort(), 4);
-
+                listener.startServerWork(initializationGUI.getPort(), initializationGUI.getThreadsCount());
             }
         });
     }
 
     private void showRuningGUI(){
         runningGUI = new RunningGUI(locale, msgPool, initializationGUI.getPort());
+    }
+    public void updateThreadsNums(ThreadInfo[] infos){
+        runningGUI.updateData(infos);
     }
 }

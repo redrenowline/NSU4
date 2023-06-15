@@ -25,10 +25,18 @@ public class SocketHandler<T extends Parser> implements Runnable{
         user = new UserHandler(nickname, null);
         try {
             socket = SocketChannel.open(new InetSocketAddress(hostname, port));
+            sendLoginMessage();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
+    }
+    public void sendLoginMessage(){
+        sendMessage(this.user.getNickname(), Chunk.TAG.LOGIN);
+    }
+
+    public void sendListRequest(){
+        sendMessage("", Chunk.TAG.LIST);
     }
 
     public synchronized void sendMessage(String message, Chunk.TAG tag){
@@ -56,10 +64,18 @@ public class SocketHandler<T extends Parser> implements Runnable{
                 ByteBuffer buffer = ByteBuffer.allocate(length);
                 socket.read(buffer);
                 byte[] mass = buffer.array();
-                listener.weGetMessage(parser.deconvertChunk(mass));
+                analyzeMessage(parser.deconvertChunk(mass));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+        }
+    }
+
+    public void analyzeMessage(Chunk chunk){
+        switch(chunk.getTag()){
+            case MESSAGE, LOGIN:
+                listener.weGetMessage(chunk);
+                break;
         }
     }
 

@@ -13,4 +13,5 @@ public class UIResourcesConstants {
     public static final String NICKNAME_LABEL = "CLIENT_NICKNAME_LABEL";
     public static final String NEW_LOGIN = "CLIENT_NEW_LOGIN";
     public static final String OLD_LOGOUT = "CLIENT_OLD_LOGOUT";
+    public static final String CLIENT_NAME_LABEL = "CLIENT_NAME_LABEL";
 }

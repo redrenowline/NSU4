@@ -4,4 +4,5 @@ import ru.nsu.ccfit.Prokhorov.shared.Chunk;
 
 public interface SocketListener {
     public void weGetMessage(Chunk msg);
+    public void weGetAnswer(Chunk chunk);
 }

@@ -6,4 +6,5 @@ public interface MessageThreadsListener {
 
     public void sendMessageToEveryone(Chunk msg);
     public String getUsersInfo();
+    public void SomeoneDisconnected();
 }

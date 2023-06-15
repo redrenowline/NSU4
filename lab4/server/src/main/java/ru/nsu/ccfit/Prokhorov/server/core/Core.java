@@ -3,11 +3,6 @@ package ru.nsu.ccfit.Prokhorov.server.core;
 import ru.nsu.ccfit.Prokhorov.server.gui.GUIHandler;
 import ru.nsu.ccfit.Prokhorov.server.net.ServerHandler;
 
-import java.io.*;
-import java.net.InetSocketAddress;
-import java.nio.channels.ServerSocketChannel;
-import java.nio.channels.SocketChannel;
-
 public class Core implements GUIListener {
 
     private MessagePool pool;
@@ -18,12 +13,15 @@ public class Core implements GUIListener {
     public Core(){
         pool = new MessagePool();
         gui = new GUIHandler(this, pool);
+    }
+
+    public void start(){
         gui.showInitWindow();
     }
 
     @Override
     public void startServerWork(int port, int THREAD_COUNT) {
-        serverHandler = new ServerHandler(pool, port, THREAD_COUNT);
+        serverHandler = new ServerHandler(gui, pool, port, THREAD_COUNT);
         serverHandler.start();
     }
 }

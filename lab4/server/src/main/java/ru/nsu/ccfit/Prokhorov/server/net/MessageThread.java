@@ -1,5 +1,7 @@
-package ru.nsu.ccfit.Prokhorov.server.core;
+package ru.nsu.ccfit.Prokhorov.server.net;
 
+import ru.nsu.ccfit.Prokhorov.server.core.MessagePool;
+import ru.nsu.ccfit.Prokhorov.server.core.MessageThreadsListener;
 import ru.nsu.ccfit.Prokhorov.shared.Chunk;
 import ru.nsu.ccfit.Prokhorov.shared.Parser;
 
@@ -12,7 +14,7 @@ import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 import java.util.*;
 
-public class MessageThread extends Thread{
+public class MessageThread implements Runnable{
 
     java.util.logging.Logger log = java.util.logging.Logger.getLogger(MessageThread.class.getName());
 
@@ -113,7 +115,6 @@ public class MessageThread extends Thread{
                         buffer = ByteBuffer.allocate(cb );
                         socketChanel.read(buffer);
                     } catch (IOException e) {
-                        disconnectSocket(socketChanel);
                         continue;
                     }
                     byte[] mass = buffer.array();
@@ -172,10 +173,12 @@ public class MessageThread extends Thread{
 
     public void disconnectSocket(SocketChannel socket) {
         channelList.remove(socket);
-        try {
-            listener.sendMessageToEveryone(new Chunk(null, names.get(socket.getLocalAddress()), Chunk.TAG.LOGOUT));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        listener.SomeoneDisconnected();
+
+    }
+
+    public ThreadInfo getInfo(){
+        ThreadInfo info = new ThreadInfo("worker", this.channelList.size(), this.names.size());
+        return info;
     }
 }

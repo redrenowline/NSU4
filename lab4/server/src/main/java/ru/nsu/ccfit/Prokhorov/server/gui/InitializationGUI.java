@@ -125,5 +125,12 @@ public class InitializationGUI extends JFrame {
     public int getPort(){
         return Integer.parseInt(portField.getText());
     }
+    public String getParser(){
+        return comboBox.getActionCommand();
+    }
+
+    public int getThreadsCount(){
+        return Integer.parseInt(threadsField.getText());
+    }
 
 }

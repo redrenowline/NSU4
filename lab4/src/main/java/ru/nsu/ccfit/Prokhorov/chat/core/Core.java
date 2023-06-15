@@ -30,7 +30,6 @@ public class Core implements UIListener, SocketListener {
         guiHandler = new GUIHandler(locale);
         guiHandler.addListener(this);
         resourceBundle1 = ResourceBundle.getBundle(UIResourcesConstants.BUNDLE_NAME, locale);
-        resourceBundle2 = ResourceBundle.getBundle(UIResourcesConstants.BUNDLE_NAME, locale);
     }
 
     @Override
@@ -39,7 +38,6 @@ public class Core implements UIListener, SocketListener {
             socketHandler = new SocketHandler<>(this, new SerializeParser(), hostname, port, nickname);
         }catch(RuntimeException e){
             guiHandler.showMessageAboutUnpath();
-            logger.severe(resourceBundle2.getString(LoggerDataConstants.LOGGER_ERROR));
             return;
         }
         guiHandler.connectionIsCompleted();
@@ -52,18 +50,22 @@ public class Core implements UIListener, SocketListener {
         try {
             socketHandler.sendMessage(msg, Chunk.TAG.MESSAGE);
         }catch(Exception e){
-            logger.severe(resourceBundle2.getString(LoggerDataConstants.LOGGER_ERROR));
+
         }
     }
 
     @Override
     public synchronized void weGetMessage(Chunk msg) {
-        logger.severe(resourceBundle2.getString(LoggerDataConstants.LOGGER_USER_GET_USERS_LIST));
         if(msg.getTag() == Chunk.TAG.MESSAGE)
             guiHandler.addNewMessage(String.format(UIResources.msg_format,msg.getUserInfo().getNickname(),msg.getMsg()));
         else if(msg.getTag() == Chunk.TAG.LOGIN)
             guiHandler.addNewMessage(String.format(resourceBundle1.getString(UIResourcesConstants.NEW_LOGIN), msg.getMsg()));
         else if(msg.getTag() == Chunk.TAG.LOGOUT)
             guiHandler.addNewMessage(String.format(resourceBundle1.getString(UIResourcesConstants.OLD_LOGOUT), msg.getMsg()));
+    }
+
+    @Override
+    public void weGetAnswer(Chunk chunk) {
+
     }
 }

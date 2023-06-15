@@ -12,4 +12,7 @@ public class UIResourcesConstants {
     public static final String START_SERVER = "SERVER_START_WORK_BTN";
     public static final String PORT_DEF = "SERVER_PORT_DEFAULT_FIELD";
     public static final String THREADS_DEF = "SERVER_THREADS_DEFAULT_FIELD";
+    public static final String SERVER_THREADS_NAME_LABEL = "SERVER_THREADS_NAME_LABEL";
+    public static final String SERVER_THREADS_CONNECTIONS_COUNT = "SERVER_THREADS_CONNECTIONS_COUNT";
+    public static final String SERVER_THREADS_USERS_COUNT = "SERVER_THREADS_USERS_COUNT";
 }
