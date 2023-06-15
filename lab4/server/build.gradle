@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+}
+
+group 'ru.nsu.ccfit.Prokhorov.server'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation project(':shared')
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+sourceSets{
+    main {
+        java {
+            srcDir 'server/src/main/java/'
+            srcDir 'shared/main/java'
+        }
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
